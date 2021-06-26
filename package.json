@@ -1,6 +1,7 @@
 {
   "name": "boilerplate-react-typescript-atomic-design",
   "version": "0.1.0",
+  "homepage":".",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -27,6 +28,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -25,7 +25,7 @@ interface Props {
   errorMessage?: string;
   onOpen?: () => void;
   onClose?: () => void;
-  onChange?: (e: React.ChangeEvent<{ value: unknown }>) => void;
+  onChange?: (e: React.ChangeEvent<{ value: any }>) => void;
   classNamesRootSelect?: string;
   classNamesContainerDropwdown?: string;
   classNamesIconSelect?: string;

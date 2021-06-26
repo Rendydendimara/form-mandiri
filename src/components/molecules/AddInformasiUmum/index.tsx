@@ -2,18 +2,15 @@ import Collapse from '@material-ui/core/Collapse';
 import { ReactComponent as AddIcon } from 'assets/icons/AddIcon.svg';
 import { ReactComponent as CalenderIcon } from 'assets/icons/CalenderIcon.svg';
 import { Button, Textfield } from 'components/atoms';
+import { IStateFormInformasiUmum } from 'interfaces/IStateFormInformasiUmum';
 import React, { ReactElement, useState } from 'react';
 import useStyles from './styles';
 
 interface IProps {
-  changeInformasiUmum: (data: any) => void;
-}
-interface IStateFormInformasiUmum {
-  tanggal: string;
-  jenisTransaksi: string;
+  changeInformasiUmum: (data: IStateFormInformasiUmum) => void;
 }
 
-const AddInformasiUmum: React.FC<IProps> = (): ReactElement => {
+const AddInformasiUmum: React.FC<IProps> = (props): ReactElement => {
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
   const [stateInformasiUmum, setStateInformasiUmum] =
     useState<IStateFormInformasiUmum>({
@@ -26,13 +23,21 @@ const AddInformasiUmum: React.FC<IProps> = (): ReactElement => {
     setIsOpenForm(!isOpenForm);
   };
 
-  const handleChangeStateInformasiUmum = (
+  const handleChangeStateInformasiUmum = async (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
+  ): Promise<void> => {
     setStateInformasiUmum({
       ...stateInformasiUmum,
       [event.target.name]: String(event.target.value),
     });
+    let cloneStateInformasiUmum: IStateFormInformasiUmum = {
+      ...stateInformasiUmum,
+    };
+    await setStateInformasiUmum((prevState: IStateFormInformasiUmum) => {
+      cloneStateInformasiUmum = prevState;
+      return prevState;
+    });
+    props.changeInformasiUmum(cloneStateInformasiUmum);
   };
 
   return (
@@ -50,9 +55,16 @@ const AddInformasiUmum: React.FC<IProps> = (): ReactElement => {
           <Textfield
             label='Tanggal'
             placeholder='DD/MM/YYYY'
-            value={stateInformasiUmum.tanggal}
             name='tanggal'
+            type='date'
             onChange={handleChangeStateInformasiUmum}
+            defaultValue={
+              new Date().getDate() +
+              '/' +
+              `${Number(new Date().getMonth()) + 1}` +
+              '/' +
+              new Date().getFullYear()
+            }
           />
           <Textfield
             label='Transaksi'

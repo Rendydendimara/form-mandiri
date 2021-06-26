@@ -15,7 +15,7 @@ interface Props {
   hintText?: string;
   maxLength?: number;
   name?: string;
-  type?: 'text' | 'password';
+  type?: 'text' | 'password' | 'date';
   value?: any;
   required?: boolean;
   defaultValue?: any;
@@ -48,6 +48,7 @@ interface Props {
   classNameTextMaxLenght?: string;
   classNameLabelContainer?: string;
   classNameContainer?: string;
+  isDisable?: boolean;
 }
 
 const TextField: React.FC<Props> = (props) => {
@@ -93,6 +94,7 @@ const TextField: React.FC<Props> = (props) => {
       )}
       {props.variant === 'filled' || props.variant === 'nofill' ? (
         <FilledInput
+          disabled={props.isDisable}
           autoComplete='off'
           innerRef={props.autoCompleteParams?.InputProps.ref}
           placeholder={props.placeholder ?? ''}
@@ -132,6 +134,7 @@ const TextField: React.FC<Props> = (props) => {
         />
       ) : (
         <OutlinedInput
+          disabled={props.isDisable}
           autoComplete='off'
           innerRef={props.autoCompleteParams?.InputProps.ref}
           value={props.value}

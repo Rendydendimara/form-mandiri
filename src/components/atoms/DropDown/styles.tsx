@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   rootSelect: {
-    height: 64,
+    height: 50,
     backgroundColor: 'white',
     borderRadius: theme.spacing(0.625),
     fontWeight: 700,
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   rootSelectOutlined: {
-    padding: '0px 20px 0px 30px !important',
+    padding: '0px 10px 0px 9px !important',
     color: 'var(--color-mine-shaft)',
     height: '100%',
     display: 'flex',

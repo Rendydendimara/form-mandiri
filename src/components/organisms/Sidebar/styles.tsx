@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '24px 27px 45px 11px',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    overflowY: 'scroll',
   },
   containerBtnAside: {
     display: 'flex',
@@ -16,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   },
   labelBtnPrint: {
     color: 'var(--color-white)',
+  },
+  btnPrint: {
+    marginTop: 20,
   },
 }));
 
