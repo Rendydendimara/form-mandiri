@@ -1,7 +1,4 @@
-import { IDataGlobal } from 'interfaces/IDataGlobal';
-import Splash from 'pages/Splash';
-import React, { lazy, ReactElement, Suspense, useState } from 'react';
-import useStyles from './styles';
+import { INITIAL_STATE } from 'constant';
 import { IInformasiPenerimaDanValidasi } from 'interfaces/IInformasiPenerimaDanValidasi';
 import { IStateFormInformasiSumberDanaTransaksi } from 'interfaces/IStateFormInformasiSumberDanaTransaksi';
 import { IStateFormInformasiTransaksi } from 'interfaces/IStateFormInformasiTransaksi';
@@ -9,6 +6,10 @@ import { IStateFormInformasiUmum } from 'interfaces/IStateFormInformasiUmum';
 import { IStateInformasiBiayaTransaksi } from 'interfaces/IStateInformasiBiayaTransaksi';
 import { IStateInformasiMetodeTransaksi } from 'interfaces/IStateInformasiMetodeTransaksi';
 import { IStateInformasiPengirim } from 'interfaces/IStateInformasiPengirim';
+import Splash from 'pages/Splash';
+import React, { lazy, ReactElement, Suspense, useState } from 'react';
+import useStyles from './styles';
+import { getLocal, setLocal } from 'local/localStorage';
 
 interface IProps {}
 
@@ -21,63 +22,67 @@ const SIDEBARCOMPONENT = lazy(
 
 const HomePage: React.FC<IProps> = (): ReactElement => {
   const classes = useStyles();
-  const [dataGlobal, setDataGlobal] = useState<IDataGlobal>({
-    informasiUmum: {
-      tanggal: '',
-      jenisTransaksi: '',
-    },
-    informasiPenerimaDanValidasi: {
-      validasi: '',
-      namaPenerima: '',
-      noRekening: '',
-      bank: '',
-      alamatDanTelepon: '',
-      jenisDanNomorIdentitas: '',
-      jenisPenerima: '',
-      statusKependudukan: '',
-    },
-    informasiTransaksi: {
-      tujuanTransaksi: '',
-      beritaTransaksi: '',
-    },
-    informasiPengirim: {
-      tipePengirim: '',
-      nikOrPassporOrNpwpPerusahaan: '',
-      jenisPengirim: '',
-      statusKependudukan: '',
-      namaPengirim: '',
-      alamatDanNomorTelepon: '',
-    },
-    informasiMetodeTransaksi: {
-      jenisTransaksi: '',
-      cekGiro: '',
-      dataTabel: [
-        {
-          bankTarik: '',
-          noCekAtauBg: '',
-          valuta: '',
-          nominal: '',
-        },
-        {
-          bankTarik: '',
-          noCekAtauBg: '',
-          valuta: '',
-          nominal: '',
-        },
-      ],
-      jumlahSetoran: '',
-      terbilang: '',
-    },
-    informasiSumberDanaTransaksi: {
-      sumberDanaTransaksi: '',
-    },
-    informasiBiayaTransaksi: {
-      jenisTransaksi: '',
-      totalBiayaTransaksi: '',
-      biayaBankKoresponden: '',
-      lainnya: '',
-    },
-  });
+  const DATA_COOKIE_FORM_MANDIRI = getLocal('DataCookieForm');
+  console.log('DATA_COOKIE_FORM_MANDIRI', DATA_COOKIE_FORM_MANDIRI);
+  const [dataGlobal, setDataGlobal] = useState<any>(
+    DATA_COOKIE_FORM_MANDIRI || {
+      informasiUmum: {
+        tanggal: INITIAL_STATE,
+        jenisTransaksi: INITIAL_STATE,
+      },
+      informasiPenerimaDanValidasi: {
+        validasi: INITIAL_STATE,
+        namaPenerima: INITIAL_STATE,
+        noRekening: INITIAL_STATE,
+        bank: INITIAL_STATE,
+        alamatDanTelepon: INITIAL_STATE,
+        jenisDanNomorIdentitas: INITIAL_STATE,
+        jenisPenerima: INITIAL_STATE,
+        statusKependudukan: INITIAL_STATE,
+      },
+      informasiTransaksi: {
+        tujuanTransaksi: INITIAL_STATE,
+        beritaTransaksi: INITIAL_STATE,
+      },
+      informasiPengirim: {
+        tipePengirim: INITIAL_STATE,
+        nikOrPassporOrNpwpPerusahaan: INITIAL_STATE,
+        jenisPengirim: INITIAL_STATE,
+        statusKependudukan: INITIAL_STATE,
+        namaPengirim: INITIAL_STATE,
+        alamatDanNomorTelepon: INITIAL_STATE,
+      },
+      informasiMetodeTransaksi: {
+        jenisTransaksi: INITIAL_STATE,
+        cekGiro: INITIAL_STATE,
+        dataTabel: [
+          {
+            bankTarik: INITIAL_STATE,
+            noCekAtauBg: INITIAL_STATE,
+            valuta: INITIAL_STATE,
+            nominal: INITIAL_STATE,
+          },
+          {
+            bankTarik: INITIAL_STATE,
+            noCekAtauBg: INITIAL_STATE,
+            valuta: INITIAL_STATE,
+            nominal: INITIAL_STATE,
+          },
+        ],
+        jumlahSetoran: INITIAL_STATE,
+        terbilang: INITIAL_STATE,
+      },
+      informasiSumberDanaTransaksi: {
+        sumberDanaTransaksi: INITIAL_STATE,
+      },
+      informasiBiayaTransaksi: {
+        jenisTransaksi: INITIAL_STATE,
+        totalBiayaTransaksi: INITIAL_STATE,
+        biayaBankKoresponden: INITIAL_STATE,
+        lainnya: INITIAL_STATE,
+      },
+    }
+  );
 
   const handleChangeDataGlobal = (
     type: string,
@@ -90,8 +95,11 @@ const HomePage: React.FC<IProps> = (): ReactElement => {
       | IStateFormInformasiSumberDanaTransaksi
       | IStateInformasiBiayaTransaksi
   ): void => {
-    console.log(type, data);
     setDataGlobal({
+      ...dataGlobal,
+      [type]: data,
+    });
+    setLocal('DataCookieForm', {
       ...dataGlobal,
       [type]: data,
     });

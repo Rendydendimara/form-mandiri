@@ -1,4 +1,12 @@
+import { IPositionCompoent } from './IPositionComponent';
+
 export interface IStateFormInformasiUmum {
-  tanggal: string;
-  jenisTransaksi: string;
+  tanggal: {
+    value: string;
+    position: IPositionCompoent;
+  };
+  jenisTransaksi: {
+    value: string;
+    position: IPositionCompoent;
+  };
 }

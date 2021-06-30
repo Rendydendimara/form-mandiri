@@ -35,43 +35,36 @@ interface IProps {
 const Sidebar: React.FC<IProps> = (props): ReactElement => {
   const handleChangeInformasiUmum = (data: IStateFormInformasiUmum): void => {
     props.changeDataGlobal('informasiUmum', data);
-    // console.log('IStateFormInformasiUmum', data);
   };
   const handleChangeInformasiPenerimaDanValidasi = (
     data: IInformasiPenerimaDanValidasi
   ): void => {
     props.changeDataGlobal('informasiPenerimaDanValidasi', data);
-    // console.log('IInformasiPenerimaDanValidasi', data);
   };
   const handleChangeInformasiTransaksi = (
     data: IStateFormInformasiTransaksi
   ): void => {
     props.changeDataGlobal('informasiTransaksi', data);
-    // console.log('IStateFormInformasiTransaksi', data);
   };
   const handleChangeInformasiPengirim = (
     data: IStateInformasiPengirim
   ): void => {
     props.changeDataGlobal('informasiPengirim', data);
-    // console.log('IStateInformasiPengirim', data);
   };
   const handleChangeInformasiMetodeTransaksi = (
     data: IStateInformasiMetodeTransaksi
   ): void => {
     props.changeDataGlobal('informasiMetodeTransaksi', data);
-    // console.log('IStateInformasiMetodeTransaksi', data);
   };
   const handleChangeInformasiSumberDanaTransaksi = (
     data: IStateFormInformasiSumberDanaTransaksi
   ): void => {
     props.changeDataGlobal('informasiSumberDanaTransaksi', data);
-    // console.log('IStateFormInformasiSumberDanaTransaksi', data);
   };
   const handleChangeInformasiBiayaTransaksi = (
     data: IStateInformasiBiayaTransaksi
   ): void => {
     props.changeDataGlobal('informasiBiayaTransaksi', data);
-    // console.log('IStateInformasiBiayaTransaksi', data);
   };
 
   const classes = useStyles();

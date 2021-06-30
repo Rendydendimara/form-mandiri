@@ -1,19 +1,41 @@
 import { EnumJenisTransaksi } from 'enum';
+import { IPositionCompoent } from './IPositionComponent';
 
 export interface IDataTabelInformasiMetodeTransaksi {
-  bankTarik: string;
-  noCekAtauBg: string;
-  valuta: string;
-  nominal: string;
+  bankTarik: {
+    value: string;
+    position: IPositionCompoent;
+  };
+  noCekAtauBg: {
+    value: string;
+    position: IPositionCompoent;
+  };
+  valuta: {
+    value: string;
+    position: IPositionCompoent;
+  };
+  nominal: {
+    value: string;
+    position: IPositionCompoent;
+  };
 }
 
 export interface IStateInformasiMetodeTransaksi {
-  jenisTransaksi:
-    | EnumJenisTransaksi.TUNAI
-    | EnumJenisTransaksi.DEBIT_REKENING
-    | '';
-  cekGiro: '';
+  jenisTransaksi: {
+    value: EnumJenisTransaksi.TUNAI | EnumJenisTransaksi.DEBIT_REKENING | '';
+    position: IPositionCompoent;
+  };
+  cekGiro: {
+    value: string;
+    position: IPositionCompoent;
+  };
   dataTabel: IDataTabelInformasiMetodeTransaksi[];
-  jumlahSetoran: string;
-  terbilang: string;
+  jumlahSetoran: {
+    value: string;
+    position: IPositionCompoent;
+  };
+  terbilang: {
+    value: string;
+    position: IPositionCompoent;
+  };
 }

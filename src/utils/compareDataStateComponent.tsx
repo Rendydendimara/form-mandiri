@@ -5,6 +5,9 @@
  * @param nextProps next data state in component
  * @returns result compare data props type boolean
  */
-export const compareState = (prevProps: any, nextProps: any): boolean => {
+export const compareDataStateComponent = (
+  prevProps: any,
+  nextProps: any
+): boolean => {
   return JSON.stringify(prevProps) === JSON.stringify(nextProps);
 };

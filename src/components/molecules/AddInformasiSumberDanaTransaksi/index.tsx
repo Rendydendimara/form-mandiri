@@ -2,10 +2,14 @@ import { Collapse } from '@material-ui/core';
 import { ReactComponent as AddIcon } from 'assets/icons/AddIcon.svg';
 import { ReactComponent as CalenderIcon } from 'assets/icons/CalenderIcon.svg';
 import { Button, DropDown } from 'components/atoms';
-import { optionsSelectSumberDanaTransaksi } from 'constant';
+import { INITIAL_STATE, optionsSelectSumberDanaTransaksi } from 'constant';
 import { EnumSumberDanaTransaksi } from 'enum';
 import { IStateFormInformasiSumberDanaTransaksi } from 'interfaces/IStateFormInformasiSumberDanaTransaksi';
 import React, { ReactElement, useState } from 'react';
+import InputPositionComponent from 'components/molecules/InputPositionComponent';
+import { getLocal } from 'local/localStorage';
+import { IDataGlobal } from 'interfaces/IDataGlobal';
+
 interface IProps {
   changeInformasiSumberDanaTransaksi: (
     data: IStateFormInformasiSumberDanaTransaksi
@@ -15,11 +19,14 @@ interface IProps {
 const AddInformasiSumberDanaTransaksi: React.FC<IProps> = (
   props
 ): ReactElement => {
+  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal('DataCookieForm');
   const [
     stateInformasiSumberDanaTransaksi,
     setStateInformasiSumberDanaTransaksi,
-  ] = useState<IStateFormInformasiSumberDanaTransaksi>({
-    sumberDanaTransaksi: '',
+  ] = useState<any>({
+    sumberDanaTransaksi:
+      DATA_COOKIE_FORM_MANDIRI.informasiSumberDanaTransaksi
+        .sumberDanaTransaksi || INITIAL_STATE,
   });
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
 
@@ -41,7 +48,11 @@ const AddInformasiSumberDanaTransaksi: React.FC<IProps> = (
     }>
   ): Promise<void> => {
     setStateInformasiSumberDanaTransaksi({
-      sumberDanaTransaksi: event.target.value,
+      ...stateInformasiSumberDanaTransaksi,
+      sumberDanaTransaksi: {
+        ...stateInformasiSumberDanaTransaksi.sumberDanaTransaksi,
+        value: event.target.value,
+      },
     });
     let cloneStateInformasiSumberDanaTransaksi: IStateFormInformasiSumberDanaTransaksi =
       {
@@ -57,7 +68,32 @@ const AddInformasiSumberDanaTransaksi: React.FC<IProps> = (
       cloneStateInformasiSumberDanaTransaksi
     );
   };
+  const onChangePositionSumberDanaTransaksi = (
+    key: string,
+    positionName: string,
+    value: number
+  ) => {
+    const category: any = {
+      ...stateInformasiSumberDanaTransaksi[String(key)],
+    };
+    category['position'] = {
+      ...category['position'],
+      [positionName]: value,
+    };
+    setStateInformasiSumberDanaTransaksi({
+      ...stateInformasiSumberDanaTransaksi,
+      [key]: category,
+    });
 
+    const tempStatePositionInformasiBiayaTransaksi: IStateFormInformasiSumberDanaTransaksi =
+      {
+        ...stateInformasiSumberDanaTransaksi,
+        [key]: category,
+      };
+    props.changeInformasiSumberDanaTransaksi(
+      tempStatePositionInformasiBiayaTransaksi
+    );
+  };
   return (
     <div>
       <Button
@@ -74,7 +110,14 @@ const AddInformasiSumberDanaTransaksi: React.FC<IProps> = (
             label='Sumber Dana Transaksi'
             onChange={handleChangeSelectSumberDanaTransaksi}
             options={optionsSelectSumberDanaTransaksi}
-            value={stateInformasiSumberDanaTransaksi.sumberDanaTransaksi}
+            value={stateInformasiSumberDanaTransaksi.sumberDanaTransaksi.value}
+          />
+          <InputPositionComponent
+            dataPosition={
+              stateInformasiSumberDanaTransaksi.sumberDanaTransaksi.position
+            }
+            handleChange={onChangePositionSumberDanaTransaksi}
+            name='sumberDanaTransaksi'
           />
         </div>
       </Collapse>

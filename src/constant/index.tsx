@@ -139,3 +139,13 @@ export const optionsSelectSumberDanaTransaksi: ISelectJenisSumberDanaTransaksi[]
       item: EnumSumberDanaTransaksi.WARISAN,
     },
   ];
+
+export const INITIAL_STATE = {
+  value: '',
+  position: {
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  },
+};

@@ -15,7 +15,7 @@ interface Props {
   hintText?: string;
   maxLength?: number;
   name?: string;
-  type?: 'text' | 'password' | 'date';
+  type?: 'text' | 'password' | 'date' | 'number';
   value?: any;
   required?: boolean;
   defaultValue?: any;
