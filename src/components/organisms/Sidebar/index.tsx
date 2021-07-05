@@ -16,6 +16,7 @@ import { IStateInformasiBiayaTransaksi } from 'interfaces/IStateInformasiBiayaTr
 import { IStateInformasiMetodeTransaksi } from 'interfaces/IStateInformasiMetodeTransaksi';
 import { IStateInformasiPengirim } from 'interfaces/IStateInformasiPengirim';
 import React, { ReactElement } from 'react';
+import { useHistory } from 'react-router';
 import useStyles from './styles';
 
 interface IProps {
@@ -30,9 +31,13 @@ interface IProps {
       | IStateFormInformasiSumberDanaTransaksi
       | IStateInformasiBiayaTransaksi
   ) => void;
+  handleResetDataForm: () => void;
 }
 
 const Sidebar: React.FC<IProps> = (props): ReactElement => {
+  const history = useHistory();
+  const classes = useStyles();
+
   const handleChangeInformasiUmum = (data: IStateFormInformasiUmum): void => {
     props.changeDataGlobal('informasiUmum', data);
   };
@@ -66,8 +71,14 @@ const Sidebar: React.FC<IProps> = (props): ReactElement => {
   ): void => {
     props.changeDataGlobal('informasiBiayaTransaksi', data);
   };
+  const handleButonPrintClicked = (): void => {
+    history.push('/print');
+  };
 
-  const classes = useStyles();
+  const handleResetData = (): void => {
+    props.handleResetDataForm();
+  };
+
   return (
     <aside className={classes.root}>
       <div className={classes.containerBtnAside}>
@@ -95,13 +106,25 @@ const Sidebar: React.FC<IProps> = (props): ReactElement => {
           changeInformasiBiayaTransaksi={handleChangeInformasiBiayaTransaksi}
         />
       </div>
-      <Button
-        fullWidth={true}
-        classsNameLabel={classes.labelBtnPrint}
-        className={classes.btnPrint}
-      >
-        Print
-      </Button>
+      <div className={classes.containerBtnAsideAction}>
+        <Button
+          fullWidth={true}
+          classsNameLabel={classes.labelBtnPrint}
+          className={classes.btnPrint}
+          onClick={handleButonPrintClicked}
+        >
+          Print
+        </Button>
+        <Button
+          fullWidth={true}
+          classsNameLabel={classes.labelBtnPrint}
+          // className={classes.btnReset}
+          onClick={handleResetData}
+          color='danger'
+        >
+          Reset Data
+        </Button>
+      </div>
     </aside>
   );
 };

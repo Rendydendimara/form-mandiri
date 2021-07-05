@@ -4,7 +4,7 @@ import {
   IStateInformasiMetodeTransaksi,
 } from 'interfaces/IStateInformasiMetodeTransaksi';
 import React, { ReactElement } from 'react';
-
+import IconCheck from 'components/atoms/IconCheck';
 interface IProps {
   data?: IStateInformasiMetodeTransaksi;
 }
@@ -17,7 +17,7 @@ const PreviewInformasiMetodeTransaksi: React.FC<IProps> = (
       <div>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.jenisTransaksi.position.top}px`,
             left: `${props.data?.jenisTransaksi.position.left}px`,
             bottom: `${props.data?.jenisTransaksi.position.bottom}px`,
@@ -25,15 +25,16 @@ const PreviewInformasiMetodeTransaksi: React.FC<IProps> = (
           }}
           className='textPreviewForm'
         >
-          {props.data?.jenisTransaksi.value}
+          {props.data?.jenisTransaksi.value && <IconCheck />}
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.cekGiro.position.top}px`,
             left: `${props.data?.cekGiro.position.left}px`,
             bottom: `${props.data?.cekGiro.position.bottom}px`,
             right: `${props.data?.cekGiro.position.right}px`,
+            letterSpacing: 11,
           }}
           className='textPreviewForm'
         >
@@ -44,7 +45,7 @@ const PreviewInformasiMetodeTransaksi: React.FC<IProps> = (
             <div key={index}>
               <Typography
                 style={{
-                  position: 'relative',
+                  position: 'absolute',
                   top: `${data.bankTarik.position.top}px`,
                   left: `${data.bankTarik.position.left}px`,
                   bottom: `${data.bankTarik.position.bottom}px`,
@@ -56,7 +57,7 @@ const PreviewInformasiMetodeTransaksi: React.FC<IProps> = (
               </Typography>
               <Typography
                 style={{
-                  position: 'relative',
+                  position: 'absolute',
                   top: `${data.noCekAtauBg.position.top}px`,
                   left: `${data.noCekAtauBg.position.left}px`,
                   bottom: `${data.noCekAtauBg.position.bottom}px`,
@@ -68,7 +69,7 @@ const PreviewInformasiMetodeTransaksi: React.FC<IProps> = (
               </Typography>
               <Typography
                 style={{
-                  position: 'relative',
+                  position: 'absolute',
                   top: `${data.valuta.position.top}px`,
                   left: `${data.valuta.position.left}px`,
                   bottom: `${data.valuta.position.bottom}px`,
@@ -80,7 +81,7 @@ const PreviewInformasiMetodeTransaksi: React.FC<IProps> = (
               </Typography>
               <Typography
                 style={{
-                  position: 'relative',
+                  position: 'absolute',
                   top: `${data.nominal.position.top}px`,
                   left: `${data.nominal.position.left}px`,
                   bottom: `${data.nominal.position.bottom}px`,
@@ -95,7 +96,7 @@ const PreviewInformasiMetodeTransaksi: React.FC<IProps> = (
         )}
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.jumlahSetoran.position.top}px`,
             left: `${props.data?.jumlahSetoran.position.left}px`,
             bottom: `${props.data?.jumlahSetoran.position.bottom}px`,
@@ -107,7 +108,7 @@ const PreviewInformasiMetodeTransaksi: React.FC<IProps> = (
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.terbilang.position.top}px`,
             left: `${props.data?.terbilang.position.left}px`,
             bottom: `${props.data?.terbilang.position.bottom}px`,

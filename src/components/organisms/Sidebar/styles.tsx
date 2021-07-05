@@ -18,8 +18,18 @@ const useStyles = makeStyles((theme) => ({
   labelBtnPrint: {
     color: 'var(--color-white)',
   },
-  btnPrint: {
+  containerBtnAsideAction: {
     marginTop: 20,
+    display: 'flex',
+    gap: 20,
+    flexDirection: 'column',
+  },
+  btnPrint: {
+    minHeight: 40,
+  },
+  btnReset: {
+    minHeight: 40,
+    display: 'none',
   },
 }));
 

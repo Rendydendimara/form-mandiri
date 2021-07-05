@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { IStateFormInformasiSumberDanaTransaksi } from 'interfaces/IStateFormInformasiSumberDanaTransaksi';
 import React, { ReactElement } from 'react';
-
+import IconCheck from 'components/atoms/IconCheck';
 interface IProps {
   data?: IStateFormInformasiSumberDanaTransaksi;
 }
@@ -14,7 +14,7 @@ const PreviewInformasiSumberDanaTransaksi: React.FC<IProps> = (
       <div>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.sumberDanaTransaksi.position.top}px`,
             left: `${props.data?.sumberDanaTransaksi.position.left}px`,
             bottom: `${props.data?.sumberDanaTransaksi.position.bottom}px`,
@@ -22,7 +22,7 @@ const PreviewInformasiSumberDanaTransaksi: React.FC<IProps> = (
           }}
           className='textPreviewForm'
         >
-          {props.data?.sumberDanaTransaksi.value}
+          {props.data?.sumberDanaTransaksi.value && <IconCheck />}
         </Typography>
       </div>
     </div>

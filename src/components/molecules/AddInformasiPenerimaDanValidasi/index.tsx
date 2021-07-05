@@ -29,30 +29,31 @@ const AddInformasiPenerimaDanValidasi: React.FC<IProps> = (
     stateInformasiPenerimaDanValidas,
     setStateInformasiPenerimaDanValidas,
   ] = useState<any>({
-    validasi:
-      DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.validasi ||
-      INITIAL_STATE,
-    namaPenerima:
-      DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.namaPenerima ||
-      INITIAL_STATE,
-    noRekening:
-      DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.noRekening ||
-      INITIAL_STATE,
-    bank:
-      DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.bank ||
-      INITIAL_STATE,
-    alamatDanTelepon:
-      DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.alamatDanTelepon ||
-      INITIAL_STATE,
-    jenisDanNomorIdentitas:
-      DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
-        .jenisDanNomorIdentitas || INITIAL_STATE,
-    jenisPenerima:
-      DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.jenisPenerima ||
-      INITIAL_STATE,
-    statusKependudukan:
-      DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
-        .statusKependudukan || INITIAL_STATE,
+    validasi: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.validasi
+      : INITIAL_STATE,
+    namaPenerima: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.namaPenerima
+      : INITIAL_STATE,
+    noRekening: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.noRekening
+      : INITIAL_STATE,
+    bank: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.bank
+      : INITIAL_STATE,
+    alamatDanTelepon: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.alamatDanTelepon
+      : INITIAL_STATE,
+    jenisDanNomorIdentitas: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+          .jenisDanNomorIdentitas
+      : INITIAL_STATE,
+    jenisPenerima: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.jenisPenerima
+      : INITIAL_STATE,
+    statusKependudukan: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.statusKependudukan
+      : INITIAL_STATE,
   });
 
   const handleChangeStateInformasiPenerimaDanValidas = async (

@@ -2,7 +2,11 @@ import Collapse from '@material-ui/core/Collapse';
 import { ReactComponent as AddIcon } from 'assets/icons/AddIcon.svg';
 import { ReactComponent as CalenderIcon } from 'assets/icons/CalenderIcon.svg';
 import { Button, DropDown, Textfield } from 'components/atoms';
-import { INITIAL_STATE, optionsStatusKependudukan } from 'constant';
+import {
+  INITIAL_STATE,
+  optionsSelecteTujuanTransaksi,
+  optionsStatusKependudukan,
+} from 'constant';
 import { EnumSelectTujuanTransaksi } from 'enum';
 import { IStateFormInformasiTransaksi } from 'interfaces/IStateFormInformasiTransaksi';
 import React, { Fragment, ReactElement, useState } from 'react';
@@ -18,12 +22,12 @@ const AddInformasiTransaksi: React.FC<IProps> = (props): ReactElement => {
   const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal('DataCookieForm');
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
   const [stateInformasiTransaksi, setStateInformasiTransaksi] = useState<any>({
-    tujuanTransaksi:
-      DATA_COOKIE_FORM_MANDIRI.informasiTransaksi.tujuanTransaksi ||
-      INITIAL_STATE,
-    beritaTransaksi:
-      DATA_COOKIE_FORM_MANDIRI.informasiTransaksi.beritaTransaksi ||
-      INITIAL_STATE,
+    tujuanTransaksi: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiTransaksi.tujuanTransaksi
+      : INITIAL_STATE,
+    beritaTransaksi: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiTransaksi.beritaTransaksi
+      : INITIAL_STATE,
   });
 
   const handleChangeStateInformasiTransaksi = async (
@@ -123,7 +127,7 @@ const AddInformasiTransaksi: React.FC<IProps> = (props): ReactElement => {
             <DropDown
               label='Tujuan Transaksi'
               onChange={handleChangeSelectTujuanTransaksi}
-              options={optionsStatusKependudukan}
+              options={optionsSelecteTujuanTransaksi}
               value={stateInformasiTransaksi.tujuanTransaksi.value}
             />
             <InputPositionComponent

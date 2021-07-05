@@ -24,9 +24,10 @@ const AddInformasiSumberDanaTransaksi: React.FC<IProps> = (
     stateInformasiSumberDanaTransaksi,
     setStateInformasiSumberDanaTransaksi,
   ] = useState<any>({
-    sumberDanaTransaksi:
-      DATA_COOKIE_FORM_MANDIRI.informasiSumberDanaTransaksi
-        .sumberDanaTransaksi || INITIAL_STATE,
+    sumberDanaTransaksi: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiSumberDanaTransaksi
+          .sumberDanaTransaksi
+      : INITIAL_STATE,
   });
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
 

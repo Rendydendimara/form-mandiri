@@ -26,18 +26,18 @@ const AddInformasiBiayaTransaksi: React.FC<IProps> = (props): ReactElement => {
 
   const [stateInformasiBiayaTransaksi, setStateInformasiBiayaTransaksi] =
     useState<any>({
-      jenisTransaksi:
-        DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.jenisTransaksi ||
-        INITIAL_STATE,
-      totalBiayaTransaksi:
-        DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.totalBiayaTransaksi ||
-        INITIAL_STATE,
-      biayaBankKoresponden:
-        DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.biayaBankKoresponden ||
-        INITIAL_STATE,
-      lainnya:
-        DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.lainnya ||
-        INITIAL_STATE,
+      jenisTransaksi: DATA_COOKIE_FORM_MANDIRI
+        ? DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.jenisTransaksi
+        : INITIAL_STATE,
+      totalBiayaTransaksi: DATA_COOKIE_FORM_MANDIRI
+        ? DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.totalBiayaTransaksi
+        : INITIAL_STATE,
+      biayaBankKoresponden: DATA_COOKIE_FORM_MANDIRI
+        ? DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.biayaBankKoresponden
+        : INITIAL_STATE,
+      lainnya: DATA_COOKIE_FORM_MANDIRI
+        ? DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.lainnya
+        : INITIAL_STATE,
     });
 
   const handleToogleForm = (): void => {

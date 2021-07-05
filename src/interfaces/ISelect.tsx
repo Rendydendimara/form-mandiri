@@ -6,6 +6,7 @@ import {
   EnumSumberDanaTransaksi,
   EnumTipePengirim,
   EnumSelectJenisPenerima,
+  EnumTransaksi,
 } from 'enum';
 
 export interface ISelectStatusKependudukan {
@@ -83,4 +84,21 @@ export interface ISelectTujuanTransaksi {
     | EnumSelectTujuanTransaksi.PEMBELIAN_BARANG_ATAU_JASA
     | EnumSelectTujuanTransaksi.BIAYA_HIDUP
     | EnumSelectTujuanTransaksi.DONASI_ATAU_AMAL;
+}
+
+export interface ISelectTransaksi {
+  value:
+    | EnumTransaksi.BANK_DRAF
+    | EnumTransaksi.KLIRING_INKASO
+    | EnumTransaksi.RTGS
+    | EnumTransaksi.SETORAN
+    | EnumTransaksi.SKNBI
+    | EnumTransaksi.TTT;
+  item:
+    | EnumTransaksi.BANK_DRAF
+    | EnumTransaksi.KLIRING_INKASO
+    | EnumTransaksi.RTGS
+    | EnumTransaksi.SETORAN
+    | EnumTransaksi.SKNBI
+    | EnumTransaksi.TTT;
 }

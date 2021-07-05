@@ -1,4 +1,4 @@
-import { INITIAL_STATE } from 'constant';
+import { DEFAULT_DATA_AND_POSITION, INITIAL_STATE } from 'constant';
 import { IInformasiPenerimaDanValidasi } from 'interfaces/IInformasiPenerimaDanValidasi';
 import { IStateFormInformasiSumberDanaTransaksi } from 'interfaces/IStateFormInformasiSumberDanaTransaksi';
 import { IStateFormInformasiTransaksi } from 'interfaces/IStateFormInformasiTransaksi';
@@ -23,7 +23,6 @@ const SIDEBARCOMPONENT = lazy(
 const HomePage: React.FC<IProps> = (): ReactElement => {
   const classes = useStyles();
   const DATA_COOKIE_FORM_MANDIRI = getLocal('DataCookieForm');
-  console.log('DATA_COOKIE_FORM_MANDIRI', DATA_COOKIE_FORM_MANDIRI);
   const [dataGlobal, setDataGlobal] = useState<any>(
     DATA_COOKIE_FORM_MANDIRI || {
       informasiUmum: {
@@ -104,11 +103,19 @@ const HomePage: React.FC<IProps> = (): ReactElement => {
       [type]: data,
     });
   };
-
+  const handleResetDataForm = (): void => {
+    setLocal('DataCookieForm', DEFAULT_DATA_AND_POSITION);
+    const DATA_COOKIE_FORM_MANDIRI = getLocal('DataCookieForm');
+    setDataGlobal(DATA_COOKIE_FORM_MANDIRI);
+    window.location.reload();
+  };
   return (
     <div className={classes.root}>
       <Suspense fallback={<Splash />}>
-        <SIDEBARCOMPONENT changeDataGlobal={handleChangeDataGlobal} />
+        <SIDEBARCOMPONENT
+          changeDataGlobal={handleChangeDataGlobal}
+          handleResetDataForm={handleResetDataForm}
+        />
       </Suspense>
       <Suspense fallback={<Splash />}>
         <PREVIEWCOMPONENT dataGlobal={dataGlobal} />

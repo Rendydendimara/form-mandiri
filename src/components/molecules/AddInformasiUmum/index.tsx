@@ -3,11 +3,13 @@ import { ReactComponent as AddIcon } from 'assets/icons/AddIcon.svg';
 import { ReactComponent as CalenderIcon } from 'assets/icons/CalenderIcon.svg';
 import { Button, Textfield } from 'components/atoms';
 import InputPositionComponent from 'components/molecules/InputPositionComponent';
-import { INITIAL_STATE } from 'constant';
+import { INITIAL_STATE, optionsSelectTransaksi } from 'constant';
 import { IStateFormInformasiUmum } from 'interfaces/IStateFormInformasiUmum';
 import React, { ReactElement, useState } from 'react';
 import useStyles from './styles';
 import { getLocal } from 'local/localStorage';
+import { EnumTransaksi } from 'enum';
+import Dropdown from 'components/atoms/DropDown';
 
 interface IProps {
   changeInformasiUmum: (data: IStateFormInformasiUmum) => void;
@@ -18,9 +20,12 @@ const AddInformasiUmum: React.FC<IProps> = (props): ReactElement => {
 
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
   const [stateInformasiUmum, setStateInformasiUmum] = useState<any>({
-    tanggal: DATA_COOKIE_FORM_MANDIRI.informasiUmum.tanggal || INITIAL_STATE,
-    jenisTransaksi:
-      DATA_COOKIE_FORM_MANDIRI.informasiUmum.jenisTransaksi || INITIAL_STATE,
+    tanggal: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiUmum.tanggal
+      : INITIAL_STATE,
+    jenisTransaksi: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiUmum.jenisTransaksi
+      : INITIAL_STATE,
   });
   const classes = useStyles();
 
@@ -74,6 +79,34 @@ const AddInformasiUmum: React.FC<IProps> = (props): ReactElement => {
     props.changeInformasiUmum(tempStatePositionInformasiBiayaTransaksi);
   };
 
+  const handleChangeSelectTransaksi = async (
+    event: React.ChangeEvent<{
+      value:
+        | EnumTransaksi.BANK_DRAF
+        | EnumTransaksi.KLIRING_INKASO
+        | EnumTransaksi.RTGS
+        | EnumTransaksi.SETORAN
+        | EnumTransaksi.SKNBI
+        | EnumTransaksi.TTT;
+    }>
+  ): Promise<void> => {
+    setStateInformasiUmum({
+      ...stateInformasiUmum,
+      jenisTransaksi: {
+        ...stateInformasiUmum.jenisTransaksi,
+        value: event.target.value,
+      },
+    });
+    const tempStatePositionInformasiBiayaTransaksi: IStateFormInformasiUmum = {
+      ...stateInformasiUmum,
+      jenisTransaksi: {
+        ...stateInformasiUmum.jenisTransaksi,
+        value: event.target.value,
+      },
+    };
+    props.changeInformasiUmum(tempStatePositionInformasiBiayaTransaksi);
+  };
+
   return (
     <div>
       <Button
@@ -109,13 +142,13 @@ const AddInformasiUmum: React.FC<IProps> = (props): ReactElement => {
             />
           </div>
           <div>
-            <Textfield
+            <Dropdown
               label='Transaksi'
-              placeholder='Jenis transaksi'
+              onChange={handleChangeSelectTransaksi}
+              options={optionsSelectTransaksi}
               value={stateInformasiUmum.jenisTransaksi.value}
-              name='jenisTransaksi'
-              onChange={handleChangeStateInformasiUmum}
             />
+
             <InputPositionComponent
               dataPosition={stateInformasiUmum.jenisTransaksi.position}
               handleChange={onChangePositionInformasiUmum}

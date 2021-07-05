@@ -27,21 +27,24 @@ const AddInformasiPengirima: React.FC<IProps> = (props): ReactElement => {
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
   const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal('DataCookieForm');
   const [stateInformasiPengirim, setStateInformasiPengirim] = useState<any>({
-    tipePengirim:
-      DATA_COOKIE_FORM_MANDIRI.informasiPengirim.tipePengirim || INITIAL_STATE,
-    nikOrPassporOrNpwpPerusahaan:
-      DATA_COOKIE_FORM_MANDIRI.informasiPengirim.nikOrPassporOrNpwpPerusahaan ||
-      INITIAL_STATE,
-    jenisPengirim:
-      DATA_COOKIE_FORM_MANDIRI.informasiPengirim.jenisPengirim || INITIAL_STATE,
-    statusKependudukan:
-      DATA_COOKIE_FORM_MANDIRI.informasiPengirim.statusKependudukan ||
-      INITIAL_STATE,
-    namaPengirim:
-      DATA_COOKIE_FORM_MANDIRI.informasiPengirim.namaPengirim || INITIAL_STATE,
-    alamatDanNomorTelepon:
-      DATA_COOKIE_FORM_MANDIRI.informasiPengirim.alamatDanNomorTelepon ||
-      INITIAL_STATE,
+    tipePengirim: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPengirim.tipePengirim
+      : INITIAL_STATE,
+    nikOrPassporOrNpwpPerusahaan: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPengirim.nikOrPassporOrNpwpPerusahaan
+      : INITIAL_STATE,
+    jenisPengirim: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPengirim.jenisPengirim
+      : INITIAL_STATE,
+    statusKependudukan: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPengirim.statusKependudukan
+      : INITIAL_STATE,
+    namaPengirim: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPengirim.namaPengirim
+      : INITIAL_STATE,
+    alamatDanNomorTelepon: DATA_COOKIE_FORM_MANDIRI
+      ? DATA_COOKIE_FORM_MANDIRI.informasiPengirim.alamatDanNomorTelepon
+      : INITIAL_STATE,
   });
 
   const handleToogleForm = (): void => {

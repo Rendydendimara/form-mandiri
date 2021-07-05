@@ -148,15 +148,6 @@ button:focus {
 @media (max-width: 768px) and (min-width: 426px) {
 }
 
-/* override styles when printing */
-@media print {
-  body {
-    margin: 0;
-    color: #000;
-    background-color: #fff;
-  }
-}
-
 /* hidden on-screen */
 .print {
   display: none;
@@ -174,8 +165,9 @@ button:focus {
   background-size: 100% 100%;
   height: 750px;
   width: 950px;
+  position: relative;
 }
 
 .textPreviewForm {
-  font-size: 14px !important;
+  font-size: 13px !important;
 }

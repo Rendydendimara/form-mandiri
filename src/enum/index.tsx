@@ -50,3 +50,12 @@ export enum EnumBiayaKoresponded {
   PENERIMA = 'penerima',
   LAINNYA = 'lainnya',
 }
+
+export enum EnumTransaksi {
+  SETORAN = 'setoran',
+  TTT = 'ttt',
+  RTGS = 'rtgs',
+  SKNBI = 'sknbi',
+  KLIRING_INKASO = 'kliring_inkaso',
+  BANK_DRAF = 'bank_draf',
+}

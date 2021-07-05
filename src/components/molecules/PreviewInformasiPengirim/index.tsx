@@ -1,6 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { IStateInformasiPengirim } from 'interfaces/IStateInformasiPengirim';
 import React, { ReactElement } from 'react';
+import IconCheck from 'components/atoms/IconCheck';
 
 interface IProps {
   data?: IStateInformasiPengirim;
@@ -12,7 +13,7 @@ const PreviewInformasiPengirim: React.FC<IProps> = (props): ReactElement => {
       <div>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.tipePengirim.position.top}px`,
             left: `${props.data?.tipePengirim.position.left}px`,
             bottom: `${props.data?.tipePengirim.position.bottom}px`,
@@ -20,11 +21,11 @@ const PreviewInformasiPengirim: React.FC<IProps> = (props): ReactElement => {
           }}
           className='textPreviewForm'
         >
-          {props.data?.tipePengirim.value}
+          {props.data?.tipePengirim.value && <IconCheck />}
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.jenisPengirim.position.top}px`,
             left: `${props.data?.jenisPengirim.position.left}px`,
             bottom: `${props.data?.jenisPengirim.position.bottom}px`,
@@ -32,11 +33,11 @@ const PreviewInformasiPengirim: React.FC<IProps> = (props): ReactElement => {
           }}
           className='textPreviewForm'
         >
-          {props.data?.jenisPengirim.value}
+          {props.data?.jenisPengirim.value && <IconCheck />}
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.statusKependudukan.position.top}px`,
             left: `${props.data?.statusKependudukan.position.left}px`,
             bottom: `${props.data?.statusKependudukan.position.bottom}px`,
@@ -44,11 +45,11 @@ const PreviewInformasiPengirim: React.FC<IProps> = (props): ReactElement => {
           }}
           className='textPreviewForm'
         >
-          {props.data?.statusKependudukan.value}
+          {props.data?.statusKependudukan.value && <IconCheck />}
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.nikOrPassporOrNpwpPerusahaan.position.top}px`,
             left: `${props.data?.nikOrPassporOrNpwpPerusahaan.position.left}px`,
             bottom: `${props.data?.nikOrPassporOrNpwpPerusahaan.position.bottom}px`,
@@ -60,7 +61,7 @@ const PreviewInformasiPengirim: React.FC<IProps> = (props): ReactElement => {
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.namaPengirim.position.top}px`,
             left: `${props.data?.namaPengirim.position.left}px`,
             bottom: `${props.data?.namaPengirim.position.bottom}px`,
@@ -72,7 +73,7 @@ const PreviewInformasiPengirim: React.FC<IProps> = (props): ReactElement => {
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.alamatDanNomorTelepon.position.top}px`,
             left: `${props.data?.alamatDanNomorTelepon.position.left}px`,
             bottom: `${props.data?.alamatDanNomorTelepon.position.bottom}px`,

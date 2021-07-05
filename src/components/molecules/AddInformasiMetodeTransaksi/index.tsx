@@ -21,48 +21,56 @@ const AddInformasiMetodeTransaksi: React.FC<IProps> = (props): ReactElement => {
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
   const [stateInformasiMetodeTransaksi, setStateInformasiMetodeTransaksi] =
     useState<any>({
-      jenisTransaksi:
-        DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.jenisTransaksi ||
-        INITIAL_STATE,
-      cekGiro:
-        DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.cekGiro ||
-        INITIAL_STATE,
+      jenisTransaksi: DATA_COOKIE_FORM_MANDIRI
+        ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.jenisTransaksi
+        : INITIAL_STATE,
+      cekGiro: DATA_COOKIE_FORM_MANDIRI
+        ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.cekGiro
+        : INITIAL_STATE,
       dataTabel: [
         {
-          bankTarik:
-            DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[0]
-              .bankTarik || INITIAL_STATE,
-          noCekAtauBg:
-            DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[0]
-              .noCekAtauBg || INITIAL_STATE,
-          valuta:
-            DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[0]
-              .valuta || INITIAL_STATE,
-          nominal:
-            DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[0]
-              .nominal || INITIAL_STATE,
+          bankTarik: DATA_COOKIE_FORM_MANDIRI
+            ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[0]
+                .bankTarik
+            : INITIAL_STATE,
+          noCekAtauBg: DATA_COOKIE_FORM_MANDIRI
+            ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[0]
+                .noCekAtauBg
+            : INITIAL_STATE,
+          valuta: DATA_COOKIE_FORM_MANDIRI
+            ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[0]
+                .valuta
+            : INITIAL_STATE,
+          nominal: DATA_COOKIE_FORM_MANDIRI
+            ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[0]
+                .nominal
+            : INITIAL_STATE,
         },
         {
-          bankTarik:
-            DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[1]
-              .bankTarik || INITIAL_STATE,
-          noCekAtauBg:
-            DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[1]
-              .noCekAtauBg || INITIAL_STATE,
-          valuta:
-            DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[1]
-              .valuta || INITIAL_STATE,
-          nominal:
-            DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[1]
-              .nominal || INITIAL_STATE,
+          bankTarik: DATA_COOKIE_FORM_MANDIRI
+            ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[1]
+                .bankTarik
+            : INITIAL_STATE,
+          noCekAtauBg: DATA_COOKIE_FORM_MANDIRI
+            ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[1]
+                .noCekAtauBg
+            : INITIAL_STATE,
+          valuta: DATA_COOKIE_FORM_MANDIRI
+            ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[1]
+                .valuta
+            : INITIAL_STATE,
+          nominal: DATA_COOKIE_FORM_MANDIRI
+            ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel[1]
+                .nominal
+            : INITIAL_STATE,
         },
       ],
-      jumlahSetoran:
-        DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.jumlahSetoran ||
-        INITIAL_STATE,
-      terbilang:
-        DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.terbilang ||
-        INITIAL_STATE,
+      jumlahSetoran: DATA_COOKIE_FORM_MANDIRI
+        ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.jumlahSetoran
+        : INITIAL_STATE,
+      terbilang: DATA_COOKIE_FORM_MANDIRI
+        ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.terbilang
+        : INITIAL_STATE,
     });
 
   const handleToogleForm = (): void => {

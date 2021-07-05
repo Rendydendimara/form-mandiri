@@ -1,4 +1,5 @@
 import { Typography } from '@material-ui/core';
+import IconCheck from 'components/atoms/IconCheck';
 import { IInformasiPenerimaDanValidasi } from 'interfaces/IInformasiPenerimaDanValidasi';
 import React, { ReactElement } from 'react';
 
@@ -14,7 +15,7 @@ const PreviewInformasiPenerimaDanValidasi: React.FC<IProps> = (
       <div>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.validasi.position.top}px`,
             left: `${props.data?.validasi.position.left}px`,
             bottom: `${props.data?.validasi.position.bottom}px`,
@@ -26,7 +27,7 @@ const PreviewInformasiPenerimaDanValidasi: React.FC<IProps> = (
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.namaPenerima.position.top}px`,
             left: `${props.data?.namaPenerima.position.left}px`,
             bottom: `${props.data?.namaPenerima.position.bottom}px`,
@@ -38,7 +39,7 @@ const PreviewInformasiPenerimaDanValidasi: React.FC<IProps> = (
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.noRekening.position.top}px`,
             left: `${props.data?.noRekening.position.left}px`,
             bottom: `${props.data?.noRekening.position.bottom}px`,
@@ -50,7 +51,7 @@ const PreviewInformasiPenerimaDanValidasi: React.FC<IProps> = (
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.bank.position.top}px`,
             left: `${props.data?.bank.position.left}px`,
             bottom: `${props.data?.bank.position.bottom}px`,
@@ -62,7 +63,7 @@ const PreviewInformasiPenerimaDanValidasi: React.FC<IProps> = (
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.alamatDanTelepon.position.top}px`,
             left: `${props.data?.alamatDanTelepon.position.left}px`,
             bottom: `${props.data?.alamatDanTelepon.position.bottom}px`,
@@ -74,7 +75,7 @@ const PreviewInformasiPenerimaDanValidasi: React.FC<IProps> = (
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.jenisDanNomorIdentitas.position.top}px`,
             left: `${props.data?.jenisDanNomorIdentitas.position.left}px`,
             bottom: `${props.data?.jenisDanNomorIdentitas.position.bottom}px`,
@@ -86,7 +87,7 @@ const PreviewInformasiPenerimaDanValidasi: React.FC<IProps> = (
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.jenisPenerima.position.top}px`,
             left: `${props.data?.jenisPenerima.position.left}px`,
             bottom: `${props.data?.jenisPenerima.position.bottom}px`,
@@ -94,11 +95,11 @@ const PreviewInformasiPenerimaDanValidasi: React.FC<IProps> = (
           }}
           className='textPreviewForm'
         >
-          {props.data?.jenisPenerima.value}
+          {props.data?.jenisPenerima.value && <IconCheck />}
         </Typography>
         <Typography
           style={{
-            position: 'relative',
+            position: 'absolute',
             top: `${props.data?.statusKependudukan.position.top}px`,
             left: `${props.data?.statusKependudukan.position.left}px`,
             bottom: `${props.data?.statusKependudukan.position.bottom}px`,
@@ -106,7 +107,7 @@ const PreviewInformasiPenerimaDanValidasi: React.FC<IProps> = (
           }}
           className='textPreviewForm'
         >
-          {props.data?.statusKependudukan.value}
+          {props.data?.statusKependudukan.value && <IconCheck />}
         </Typography>
       </div>
     </div>
