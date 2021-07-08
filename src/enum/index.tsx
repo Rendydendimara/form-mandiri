@@ -42,7 +42,7 @@ export enum EnumTipePengirim {
 
 export enum EnumStatusKependudukan {
   PENDUDUK = 'penduduk',
-  BUKAN_PENDUDUK = 'bukan penduduk',
+  BUKAN_PENDUDUK = 'bukan_penduduk',
 }
 
 export enum EnumBiayaKoresponded {
@@ -53,7 +53,7 @@ export enum EnumBiayaKoresponded {
 
 export enum EnumTransaksi {
   SETORAN = 'setoran',
-  TTT = 'ttt',
+  TT = 'tt',
   RTGS = 'rtgs',
   SKNBI = 'sknbi',
   KLIRING_INKASO = 'kliring_inkaso',

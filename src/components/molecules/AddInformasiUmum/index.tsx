@@ -3,7 +3,12 @@ import { ReactComponent as AddIcon } from 'assets/icons/AddIcon.svg';
 import { ReactComponent as CalenderIcon } from 'assets/icons/CalenderIcon.svg';
 import { Button, Textfield } from 'components/atoms';
 import InputPositionComponent from 'components/molecules/InputPositionComponent';
-import { INITIAL_STATE, optionsSelectTransaksi } from 'constant';
+import {
+  INITIAL_STATE,
+  optionsSelectTransaksi,
+  INITIAL_STATE_JENIS_TRANSAKSI,
+  VERSION_LOCAL_STORAGE_FORM_MANDIRI,
+} from 'constant';
 import { IStateFormInformasiUmum } from 'interfaces/IStateFormInformasiUmum';
 import React, { ReactElement, useState } from 'react';
 import useStyles from './styles';
@@ -16,8 +21,8 @@ interface IProps {
 }
 
 const AddInformasiUmum: React.FC<IProps> = (props): ReactElement => {
-  const DATA_COOKIE_FORM_MANDIRI = getLocal('DataCookieForm');
-
+  const DATA_COOKIE_FORM_MANDIRI = getLocal(VERSION_LOCAL_STORAGE_FORM_MANDIRI);
+  console.log('DATA_COOKIE_FORM_MANDIRI', DATA_COOKIE_FORM_MANDIRI);
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
   const [stateInformasiUmum, setStateInformasiUmum] = useState<any>({
     tanggal: DATA_COOKIE_FORM_MANDIRI
@@ -25,7 +30,7 @@ const AddInformasiUmum: React.FC<IProps> = (props): ReactElement => {
       : INITIAL_STATE,
     jenisTransaksi: DATA_COOKIE_FORM_MANDIRI
       ? DATA_COOKIE_FORM_MANDIRI.informasiUmum.jenisTransaksi
-      : INITIAL_STATE,
+      : INITIAL_STATE_JENIS_TRANSAKSI,
   });
   const classes = useStyles();
 
@@ -60,23 +65,60 @@ const AddInformasiUmum: React.FC<IProps> = (props): ReactElement => {
     positionName: string,
     value: number
   ) => {
-    const category: any = {
-      ...stateInformasiUmum[String(key)],
-    };
-    category['position'] = {
-      ...category['position'],
-      [positionName]: value,
-    };
-    setStateInformasiUmum({
-      ...stateInformasiUmum,
-      [key]: category,
-    });
+    if (key !== 'jenisTransaksi') {
+      const category: any = {
+        ...stateInformasiUmum[String(key)],
+      };
+      category['position'] = {
+        ...category['position'],
+        [positionName]: value,
+      };
+      setStateInformasiUmum({
+        ...stateInformasiUmum,
+        [key]: category,
+      });
 
-    const tempStatePositionInformasiBiayaTransaksi: IStateFormInformasiUmum = {
-      ...stateInformasiUmum,
-      [key]: category,
-    };
-    props.changeInformasiUmum(tempStatePositionInformasiBiayaTransaksi);
+      const tempStatePositionInformasiBiayaTransaksi: IStateFormInformasiUmum =
+        {
+          ...stateInformasiUmum,
+          [key]: category,
+        };
+      props.changeInformasiUmum(tempStatePositionInformasiBiayaTransaksi);
+    } else {
+      setStateInformasiUmum({
+        ...stateInformasiUmum,
+        jenisTransaksi: {
+          ...stateInformasiUmum.jenisTransaksi,
+          position: {
+            ...stateInformasiUmum.jenisTransaksi.position,
+            [stateInformasiUmum.jenisTransaksi.value]: {
+              ...stateInformasiUmum.jenisTransaksi.position[
+                stateInformasiUmum.jenisTransaksi.value
+              ],
+              [positionName]: value,
+            },
+          },
+        },
+      });
+
+      const tempStatePositionInformasiBiayaTransaksi: IStateFormInformasiUmum =
+        {
+          ...stateInformasiUmum,
+          jenisTransaksi: {
+            ...stateInformasiUmum.jenisTransaksi,
+            position: {
+              ...stateInformasiUmum.jenisTransaksi.position,
+              [stateInformasiUmum.jenisTransaksi.value]: {
+                ...stateInformasiUmum.jenisTransaksi.position[
+                  stateInformasiUmum.jenisTransaksi.value
+                ],
+                [positionName]: value,
+              },
+            },
+          },
+        };
+      props.changeInformasiUmum(tempStatePositionInformasiBiayaTransaksi);
+    }
   };
 
   const handleChangeSelectTransaksi = async (
@@ -87,7 +129,7 @@ const AddInformasiUmum: React.FC<IProps> = (props): ReactElement => {
         | EnumTransaksi.RTGS
         | EnumTransaksi.SETORAN
         | EnumTransaksi.SKNBI
-        | EnumTransaksi.TTT;
+        | EnumTransaksi.TT;
     }>
   ): Promise<void> => {
     setStateInformasiUmum({
@@ -153,6 +195,8 @@ const AddInformasiUmum: React.FC<IProps> = (props): ReactElement => {
               dataPosition={stateInformasiUmum.jenisTransaksi.position}
               handleChange={onChangePositionInformasiUmum}
               name='jenisTransaksi'
+              type='jenisTransaksi'
+              keyActive={stateInformasiUmum.jenisTransaksi.value}
             />
           </div>
         </div>

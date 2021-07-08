@@ -1,18 +1,26 @@
-import { EnumSumberDanaTransaksi } from 'enum';
 import { IPositionCompoent } from './IPositionComponent';
 
 export interface IStateFormInformasiSumberDanaTransaksi {
   sumberDanaTransaksi: {
     value:
-      | EnumSumberDanaTransaksi.DANA_PEMERINTAH
-      | EnumSumberDanaTransaksi.GAJI_PENGHASILAN
-      | EnumSumberDanaTransaksi.HASIL_USAHA
-      | EnumSumberDanaTransaksi.HIBAH_HADIAH
-      | EnumSumberDanaTransaksi.PENJUALAN_ASSET
-      | EnumSumberDanaTransaksi.SUMBANGAN
-      | EnumSumberDanaTransaksi.TABUNGAN_HASIL_INVESTASI
-      | EnumSumberDanaTransaksi.WARISAN
+      | 'dana_pemerintah'
+      | 'gaji_penghasilan'
+      | 'hasil_usaha'
+      | 'hibah_hadiah'
+      | 'penjualan_asset'
+      | 'sumbangan'
+      | 'tabungan_hasil_investasi'
+      | 'warisan'
       | '';
-    position: IPositionCompoent;
+    position: {
+      dana_pemerintah: IPositionCompoent;
+      gaji_penghasilan: IPositionCompoent;
+      hasil_usaha: IPositionCompoent;
+      hibah_hadiah: IPositionCompoent;
+      penjualan_asset: IPositionCompoent;
+      sumbangan: IPositionCompoent;
+      tabungan_hasil_investasi: IPositionCompoent;
+      warisan: IPositionCompoent;
+    };
   };
 }

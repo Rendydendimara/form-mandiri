@@ -1,33 +1,31 @@
-import {
-  EnumSelectJenisPengirim,
-  EnumStatusKependudukan,
-  EnumTipePengirim,
-} from 'enum';
 import { IPositionCompoent } from './IPositionComponent';
 
 export interface IStateInformasiPengirim {
   tipePengirim: {
-    value: EnumTipePengirim.NASABAH | EnumTipePengirim.NONSABAH | '';
-    position: IPositionCompoent;
+    value: 'nasabah' | 'non_nasabah' | '';
+    position: {
+      nasabah: IPositionCompoent;
+      non_nasabah: IPositionCompoent;
+    };
   };
   nikOrPassporOrNpwpPerusahaan: {
     value: string;
     position: IPositionCompoent;
   };
   jenisPengirim: {
-    value:
-      | EnumSelectJenisPengirim.PEMERINTAH
-      | EnumSelectJenisPengirim.PERORANGAN
-      | EnumSelectJenisPengirim.PERUSAHAAN
-      | '';
-    position: IPositionCompoent;
+    value: 'pemerintah' | 'perorangan' | 'perusahaan' | '';
+    position: {
+      pemerintah: IPositionCompoent;
+      perorangan: IPositionCompoent;
+      perusahaan: IPositionCompoent;
+    };
   };
   statusKependudukan: {
-    value:
-      | EnumStatusKependudukan.PENDUDUK
-      | EnumStatusKependudukan.BUKAN_PENDUDUK
-      | '';
-    position: IPositionCompoent;
+    value: 'penduduk' | 'bukan_penduduk' | '';
+    position: {
+      penduduk: IPositionCompoent;
+      bukan_penduduk: IPositionCompoent;
+    };
   };
   namaPengirim: {
     value: string;

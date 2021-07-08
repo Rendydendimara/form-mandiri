@@ -10,18 +10,37 @@ const PreviewInformasiTransaksi: React.FC<IProps> = (props): ReactElement => {
   return (
     <div>
       <div>
-        <Typography
-          style={{
-            position: 'absolute',
-            top: `${props.data?.tujuanTransaksi.position.top}px`,
-            left: `${props.data?.tujuanTransaksi.position.left}px`,
-            bottom: `${props.data?.tujuanTransaksi.position.bottom}px`,
-            right: `${props.data?.tujuanTransaksi.position.right}px`,
-          }}
-          className='textPreviewForm'
-        >
-          {props.data?.tujuanTransaksi.value && <IconCheck />}
-        </Typography>
+        {props.data?.tujuanTransaksi.value && (
+          <Typography
+            style={{
+              position: 'absolute',
+              top: props.data?.tujuanTransaksi.value
+                ? props.data.tujuanTransaksi.position[
+                    props.data.tujuanTransaksi.value
+                  ].top
+                : props.data.tujuanTransaksi.position.bisnis + 'px',
+              left: props.data?.tujuanTransaksi.value
+                ? props.data.tujuanTransaksi.position[
+                    props.data.tujuanTransaksi.value
+                  ].left
+                : props.data.tujuanTransaksi.position.bisnis + 'px',
+              bottom: props.data?.tujuanTransaksi.value
+                ? props.data.tujuanTransaksi.position[
+                    props.data.tujuanTransaksi.value
+                  ].bottom
+                : props.data.tujuanTransaksi.position.bisnis + 'px',
+              right: props.data?.tujuanTransaksi.value
+                ? props.data.tujuanTransaksi.position[
+                    props.data.tujuanTransaksi.value
+                  ].right
+                : props.data.tujuanTransaksi.position.bisnis + 'px',
+            }}
+            className='textPreviewForm'
+          >
+            <IconCheck />
+          </Typography>
+        )}
+
         <Typography
           style={{
             position: 'absolute',

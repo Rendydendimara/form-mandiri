@@ -1,7 +1,4 @@
-import Splash from 'pages/Splash';
-import React, { lazy, ReactElement, Suspense, useState } from 'react';
-import useStyles from './styles';
-import { getLocal, setLocal } from 'local/localStorage';
+import { Button } from 'components/atoms';
 import PreviewInformasBiayaTransaksi from 'components/molecules/PreviewInformasBiayaTransaksi';
 import PreviewInformasiMetodeTransaksi from 'components/molecules/PreviewInformasiMetodeTransaksi';
 import PreviewInformasiPenerimaDanValidasi from 'components/molecules/PreviewInformasiPenerimaDanValidasi';
@@ -9,18 +6,22 @@ import PreviewInformasiPengirim from 'components/molecules/PreviewInformasiPengi
 import PreviewInformasiSumberDanaTransaksi from 'components/molecules/PreviewInformasiSumberDanaTransaksi';
 import PreviewInformasiTransaksi from 'components/molecules/PreviewInformasiTransaksi';
 import PreviewInformasiUmum from 'components/molecules/PreviewInformasiUmum';
+import { VERSION_LOCAL_STORAGE_FORM_MANDIRI } from 'constant';
 import { IDataGlobal } from 'interfaces/IDataGlobal';
-import { Button } from 'components/atoms';
-import { classNames } from 'utils/classnames';
+import { getLocal } from 'local/localStorage';
+import React, { ReactElement } from 'react';
 import { useHistory } from 'react-router';
+import { classNames } from 'utils/classnames';
+import useStyles from './styles';
 
 interface IProps {}
 
 const Print: React.FC<IProps> = (): ReactElement => {
   const classes = useStyles();
   const history = useHistory();
-  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal | undefined | null =
-    getLocal('DataCookieForm');
+  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal | undefined | null = getLocal(
+    VERSION_LOCAL_STORAGE_FORM_MANDIRI
+  );
 
   const handlePrint = () => {
     window.print();
@@ -57,7 +58,6 @@ const Print: React.FC<IProps> = (): ReactElement => {
           classsNameLabel={classes.labelBtnPrint}
           className={classNames('hideOnPrint')}
           onClick={gotoBack}
-          color='grey'
         >
           Back
         </Button>

@@ -2,29 +2,31 @@ import Collapse from '@material-ui/core/Collapse';
 import { ReactComponent as AddIcon } from 'assets/icons/AddIcon.svg';
 import { ReactComponent as CalenderIcon } from 'assets/icons/CalenderIcon.svg';
 import { Button, DropDown, Textfield } from 'components/atoms';
+import InputPositionComponent from 'components/molecules/InputPositionComponent';
 import {
   INITIAL_STATE,
+  INITIAL_STATE_TUJUAN_TRANSAKSI,
   optionsSelecteTujuanTransaksi,
-  optionsStatusKependudukan,
+  VERSION_LOCAL_STORAGE_FORM_MANDIRI,
 } from 'constant';
-import { EnumSelectTujuanTransaksi } from 'enum';
-import { IStateFormInformasiTransaksi } from 'interfaces/IStateFormInformasiTransaksi';
-import React, { Fragment, ReactElement, useState } from 'react';
-import InputPositionComponent from 'components/molecules/InputPositionComponent';
-import { getLocal } from 'local/localStorage';
 import { IDataGlobal } from 'interfaces/IDataGlobal';
+import { IStateFormInformasiTransaksi } from 'interfaces/IStateFormInformasiTransaksi';
+import { getLocal } from 'local/localStorage';
+import React, { Fragment, ReactElement, useState } from 'react';
 
 interface IProps {
   changeInformasiTransaksi: (data: IStateFormInformasiTransaksi) => void;
 }
 
 const AddInformasiTransaksi: React.FC<IProps> = (props): ReactElement => {
-  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal('DataCookieForm');
+  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal(
+    VERSION_LOCAL_STORAGE_FORM_MANDIRI
+  );
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
   const [stateInformasiTransaksi, setStateInformasiTransaksi] = useState<any>({
     tujuanTransaksi: DATA_COOKIE_FORM_MANDIRI
       ? DATA_COOKIE_FORM_MANDIRI.informasiTransaksi.tujuanTransaksi
-      : INITIAL_STATE,
+      : INITIAL_STATE_TUJUAN_TRANSAKSI,
     beritaTransaksi: DATA_COOKIE_FORM_MANDIRI
       ? DATA_COOKIE_FORM_MANDIRI.informasiTransaksi.beritaTransaksi
       : INITIAL_STATE,
@@ -61,12 +63,12 @@ const AddInformasiTransaksi: React.FC<IProps> = (props): ReactElement => {
   const handleChangeSelectTujuanTransaksi = async (
     event: React.ChangeEvent<{
       value:
-        | EnumSelectTujuanTransaksi.BIAYA_HIDUP
-        | EnumSelectTujuanTransaksi.BISNIS
-        | EnumSelectTujuanTransaksi.DONASI_ATAU_AMAL
-        | EnumSelectTujuanTransaksi.PEMBAYARAN
-        | EnumSelectTujuanTransaksi.PEMBELIAN_BARANG_ATAU_JASA
-        | EnumSelectTujuanTransaksi.TABUNGAN_ATAU_INVESTASI;
+        | 'biaya_hidup'
+        | 'bisnis'
+        | 'donasi_atau_amal'
+        | 'pembayaran'
+        | 'pembelian_barang_atau_jasa'
+        | 'tabungan_atau_investasi';
     }>
   ): Promise<void> => {
     setStateInformasiTransaksi({
@@ -93,22 +95,59 @@ const AddInformasiTransaksi: React.FC<IProps> = (props): ReactElement => {
     positionName: string,
     value: number
   ) => {
-    const category: any = {
-      ...stateInformasiTransaksi[String(key)],
-    };
-    category['position'] = {
-      ...category['position'],
-      [positionName]: value,
-    };
-    setStateInformasiTransaksi({
-      ...stateInformasiTransaksi,
-      [key]: category,
-    });
-    const cloneStateInformasiTransaksi: IStateFormInformasiTransaksi = {
-      ...stateInformasiTransaksi,
-      [key]: category,
-    };
-    props.changeInformasiTransaksi(cloneStateInformasiTransaksi);
+    if (key === 'tujuanTransaksi') {
+      setStateInformasiTransaksi({
+        ...stateInformasiTransaksi,
+        [key]: {
+          ...stateInformasiTransaksi[key],
+          position: {
+            ...stateInformasiTransaksi[key].position,
+
+            [stateInformasiTransaksi[key].value]: {
+              ...stateInformasiTransaksi[key].position[
+                stateInformasiTransaksi[key].value
+              ],
+              [positionName]: value,
+            },
+          },
+        },
+      });
+      const tempStatePositionInformasiBiayaTransaksi: IStateFormInformasiTransaksi =
+        {
+          ...stateInformasiTransaksi,
+          [key]: {
+            ...stateInformasiTransaksi[key],
+            position: {
+              ...stateInformasiTransaksi[key].position,
+
+              [stateInformasiTransaksi[key].value]: {
+                ...stateInformasiTransaksi[key].position[
+                  stateInformasiTransaksi[key].value
+                ],
+                [positionName]: value,
+              },
+            },
+          },
+        };
+      props.changeInformasiTransaksi(tempStatePositionInformasiBiayaTransaksi);
+    } else {
+      const category: any = {
+        ...stateInformasiTransaksi[String(key)],
+      };
+      category['position'] = {
+        ...category['position'],
+        [positionName]: value,
+      };
+      setStateInformasiTransaksi({
+        ...stateInformasiTransaksi,
+        [key]: category,
+      });
+      const cloneStateInformasiTransaksi: IStateFormInformasiTransaksi = {
+        ...stateInformasiTransaksi,
+        [key]: category,
+      };
+      props.changeInformasiTransaksi(cloneStateInformasiTransaksi);
+    }
   };
 
   return (
@@ -134,6 +173,7 @@ const AddInformasiTransaksi: React.FC<IProps> = (props): ReactElement => {
               dataPosition={stateInformasiTransaksi.tujuanTransaksi.position}
               handleChange={onChangePositionComponent}
               name='tujuanTransaksi'
+              keyActive={stateInformasiTransaksi.tujuanTransaksi.value}
             />
           </Fragment>
           <Fragment>

@@ -1,3 +1,4 @@
+import { EnumTransaksi } from 'enum';
 import { IPositionCompoent } from './IPositionComponent';
 
 export interface IStateFormInformasiUmum {
@@ -6,7 +7,21 @@ export interface IStateFormInformasiUmum {
     position: IPositionCompoent;
   };
   jenisTransaksi: {
-    value: string;
-    position: IPositionCompoent;
+    value:
+      | EnumTransaksi.BANK_DRAF
+      | EnumTransaksi.KLIRING_INKASO
+      | EnumTransaksi.RTGS
+      | EnumTransaksi.SETORAN
+      | EnumTransaksi.SKNBI
+      | EnumTransaksi.TT;
+    position: {
+      bank_draf: IPositionCompoent;
+      kliring_inkaso: IPositionCompoent;
+      rtgs: IPositionCompoent;
+      setoran: IPositionCompoent;
+      sknbi: IPositionCompoent;
+      tt: IPositionCompoent;
+    };
   };
+  type: 'jenisTransaksi';
 }

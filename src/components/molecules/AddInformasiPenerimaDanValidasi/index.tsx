@@ -4,8 +4,10 @@ import { ReactComponent as UserIcon } from 'assets/icons/UserIcon.svg';
 import { Button, DropDown, Textfield } from 'components/atoms';
 import {
   INITIAL_STATE,
+  INITIAL_STATE_JENIS_PENERIMA,
   optionsSelectJenisPenerima,
   optionsSelectStatusKependudukan,
+  VERSION_LOCAL_STORAGE_FORM_MANDIRI,
 } from 'constant';
 import { EnumSelectJenisPenerima, EnumStatusKependudukan } from 'enum';
 import { IInformasiPenerimaDanValidasi } from 'interfaces/IInformasiPenerimaDanValidasi';
@@ -23,7 +25,9 @@ interface IProps {
 const AddInformasiPenerimaDanValidasi: React.FC<IProps> = (
   props
 ): ReactElement => {
-  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal('DataCookieForm');
+  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal(
+    VERSION_LOCAL_STORAGE_FORM_MANDIRI
+  );
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
   const [
     stateInformasiPenerimaDanValidas,
@@ -50,7 +54,7 @@ const AddInformasiPenerimaDanValidasi: React.FC<IProps> = (
       : INITIAL_STATE,
     jenisPenerima: DATA_COOKIE_FORM_MANDIRI
       ? DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.jenisPenerima
-      : INITIAL_STATE,
+      : INITIAL_STATE_JENIS_PENERIMA,
     statusKependudukan: DATA_COOKIE_FORM_MANDIRI
       ? DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.statusKependudukan
       : INITIAL_STATE,
@@ -147,25 +151,64 @@ const AddInformasiPenerimaDanValidasi: React.FC<IProps> = (
     positionName: string,
     value: number
   ) => {
-    const category: any = {
-      ...stateInformasiPenerimaDanValidas[String(key)],
-    };
-    category['position'] = {
-      ...category['position'],
-      [positionName]: value,
-    };
-    setStateInformasiPenerimaDanValidas({
-      ...stateInformasiPenerimaDanValidas,
-      [key]: category,
-    });
-    const tempStatePositionInformasiBiayaTransaksi: IInformasiPenerimaDanValidasi =
-      {
+    if (key === 'jenisPenerima' || key === 'statusKependudukan') {
+      setStateInformasiPenerimaDanValidas({
+        ...stateInformasiPenerimaDanValidas,
+        [key]: {
+          ...stateInformasiPenerimaDanValidas[key],
+          position: {
+            ...stateInformasiPenerimaDanValidas[key].position,
+
+            [stateInformasiPenerimaDanValidas[key].value]: {
+              ...stateInformasiPenerimaDanValidas[key].position[
+                stateInformasiPenerimaDanValidas[key].value
+              ],
+              [positionName]: value,
+            },
+          },
+        },
+      });
+      const tempStatePositionInformasiBiayaTransaksi: IInformasiPenerimaDanValidasi =
+        {
+          ...stateInformasiPenerimaDanValidas,
+          [key]: {
+            ...stateInformasiPenerimaDanValidas[key],
+            position: {
+              ...stateInformasiPenerimaDanValidas[key].position,
+
+              [stateInformasiPenerimaDanValidas[key].value]: {
+                ...stateInformasiPenerimaDanValidas[key].position[
+                  stateInformasiPenerimaDanValidas[key].value
+                ],
+                [positionName]: value,
+              },
+            },
+          },
+        };
+      props.changeInformasiPenerimaDanValidasi(
+        tempStatePositionInformasiBiayaTransaksi
+      );
+    } else {
+      const category: any = {
+        ...stateInformasiPenerimaDanValidas[String(key)],
+      };
+      category['position'] = {
+        ...category['position'],
+        [positionName]: value,
+      };
+      setStateInformasiPenerimaDanValidas({
         ...stateInformasiPenerimaDanValidas,
         [key]: category,
-      };
-    props.changeInformasiPenerimaDanValidasi(
-      tempStatePositionInformasiBiayaTransaksi
-    );
+      });
+      const tempStatePositionInformasiBiayaTransaksi: IInformasiPenerimaDanValidasi =
+        {
+          ...stateInformasiPenerimaDanValidas,
+          [key]: category,
+        };
+      props.changeInformasiPenerimaDanValidasi(
+        tempStatePositionInformasiBiayaTransaksi
+      );
+    }
   };
 
   return (
@@ -291,6 +334,8 @@ const AddInformasiPenerimaDanValidasi: React.FC<IProps> = (
               }
               handleChange={onChangePositionComponent}
               name='jenisPenerima'
+              type='jenisPenerima'
+              keyActive={stateInformasiPenerimaDanValidas.jenisPenerima.value}
             />
           </Fragment>
           <Fragment>
@@ -306,6 +351,9 @@ const AddInformasiPenerimaDanValidasi: React.FC<IProps> = (
               }
               handleChange={onChangePositionComponent}
               name='statusKependudukan'
+              keyActive={
+                stateInformasiPenerimaDanValidas.statusKependudukan.value
+              }
             />
           </Fragment>
         </div>

@@ -85,30 +85,66 @@ const PreviewInformasiPenerimaDanValidasi: React.FC<IProps> = (
         >
           {props.data?.jenisDanNomorIdentitas.value}
         </Typography>
-        <Typography
-          style={{
-            position: 'absolute',
-            top: `${props.data?.jenisPenerima.position.top}px`,
-            left: `${props.data?.jenisPenerima.position.left}px`,
-            bottom: `${props.data?.jenisPenerima.position.bottom}px`,
-            right: `${props.data?.jenisPenerima.position.right}px`,
-          }}
-          className='textPreviewForm'
-        >
-          {props.data?.jenisPenerima.value && <IconCheck />}
-        </Typography>
-        <Typography
-          style={{
-            position: 'absolute',
-            top: `${props.data?.statusKependudukan.position.top}px`,
-            left: `${props.data?.statusKependudukan.position.left}px`,
-            bottom: `${props.data?.statusKependudukan.position.bottom}px`,
-            right: `${props.data?.statusKependudukan.position.right}px`,
-          }}
-          className='textPreviewForm'
-        >
-          {props.data?.statusKependudukan.value && <IconCheck />}
-        </Typography>
+        {props.data?.jenisPenerima.value && (
+          <Typography
+            style={{
+              position: 'absolute',
+              top: props.data?.jenisPenerima.value
+                ? props.data.jenisPenerima.position[
+                    props.data.jenisPenerima.value
+                  ].top
+                : props.data.jenisPenerima.position.perorangan + 'px',
+              left: props.data?.jenisPenerima.value
+                ? props.data.jenisPenerima.position[
+                    props.data.jenisPenerima.value
+                  ].left
+                : props.data.jenisPenerima.position.perorangan + 'px',
+              bottom: props.data?.jenisPenerima.value
+                ? props.data.jenisPenerima.position[
+                    props.data.jenisPenerima.value
+                  ].bottom
+                : props.data.jenisPenerima.position.perorangan + 'px',
+              right: props.data?.jenisPenerima.value
+                ? props.data.jenisPenerima.position[
+                    props.data.jenisPenerima.value
+                  ].right
+                : props.data.jenisPenerima.position.perorangan + 'px',
+            }}
+            className='textPreviewForm'
+          >
+            <IconCheck />
+          </Typography>
+        )}
+        {props.data?.statusKependudukan.value && (
+          <Typography
+            style={{
+              position: 'absolute',
+              top: props.data?.statusKependudukan.value
+                ? props.data.statusKependudukan.position[
+                    props.data.statusKependudukan.value
+                  ].top
+                : props.data.statusKependudukan.position.bukan_penduduk + 'px',
+              left: props.data?.statusKependudukan.value
+                ? props.data.statusKependudukan.position[
+                    props.data.statusKependudukan.value
+                  ].left
+                : props.data.statusKependudukan.position.bukan_penduduk + 'px',
+              bottom: props.data?.statusKependudukan.value
+                ? props.data.statusKependudukan.position[
+                    props.data.statusKependudukan.value
+                  ].bottom
+                : props.data.statusKependudukan.position.bukan_penduduk + 'px',
+              right: props.data?.statusKependudukan.value
+                ? props.data.statusKependudukan.position[
+                    props.data.statusKependudukan.value
+                  ].right
+                : props.data.statusKependudukan.position.bukan_penduduk + 'px',
+            }}
+            className='textPreviewForm'
+          >
+            <IconCheck />
+          </Typography>
+        )}
       </div>
     </div>
   );

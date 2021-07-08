@@ -1,16 +1,23 @@
 import { Typography } from '@material-ui/core';
 import TextField from 'components/atoms/Textfield';
-import { IPositionCompoent } from 'interfaces/IPositionComponent';
 import React from 'react';
 import { classNames } from 'utils/classnames';
 import styles from './styles';
 
 interface IProps {
-  dataPosition: IPositionCompoent;
+  dataPosition: any; // IPositionCompoent | IPositionJenisTransaksiCompoent;
   handleChange: (key: string, positionName: string, value: number) => void;
   classNameRoot?: string;
   classNameTextField?: string;
   name: string;
+  type?: 'jenisTransaksi' | 'jenisPenerima' | 'default';
+  keyActive?:
+    | 'bank_draf'
+    | 'kliring_inkaso'
+    | 'rtgs'
+    | 'setoran'
+    | 'sknbi'
+    | 'tt';
 }
 
 const InputPositionComponent: React.FC<IProps> = (props) => {
@@ -24,13 +31,18 @@ const InputPositionComponent: React.FC<IProps> = (props) => {
       Number(event.target.value)
     );
   };
+
   return (
     <div className={classNames(props.classNameRoot)}>
       <Typography className={classes.label}>Position (px)</Typography>
       <div className={classes.containerContent}>
         <TextField
           type='number'
-          value={props.dataPosition.top}
+          value={
+            props.keyActive
+              ? props.dataPosition[props.keyActive].top
+              : props.dataPosition.top
+          }
           label='top'
           name='top'
           onChange={handleChange}
@@ -38,7 +50,11 @@ const InputPositionComponent: React.FC<IProps> = (props) => {
         />
         <TextField
           type='number'
-          value={props.dataPosition.right}
+          value={
+            props.keyActive
+              ? props.dataPosition[props.keyActive].right
+              : props.dataPosition.right
+          }
           name='right'
           label='right'
           classNameLabel={classes.labelText}
@@ -46,7 +62,11 @@ const InputPositionComponent: React.FC<IProps> = (props) => {
         />
         <TextField
           type='number'
-          value={props.dataPosition.bottom}
+          value={
+            props.keyActive
+              ? props.dataPosition[props.keyActive].bottom
+              : props.dataPosition.bottom
+          }
           name='bottom'
           label='bottom'
           onChange={handleChange}
@@ -54,7 +74,11 @@ const InputPositionComponent: React.FC<IProps> = (props) => {
         />
         <TextField
           type='number'
-          value={props.dataPosition.left}
+          value={
+            props.keyActive
+              ? props.dataPosition[props.keyActive].left
+              : props.dataPosition.left
+          }
           name='left'
           label='left'
           onChange={handleChange}

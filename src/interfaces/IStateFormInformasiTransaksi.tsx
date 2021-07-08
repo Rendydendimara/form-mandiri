@@ -4,15 +4,22 @@ import { IPositionCompoent } from './IPositionComponent';
 export interface IStateFormInformasiTransaksi {
   tujuanTransaksi: {
     value:
-      | EnumSelectTujuanTransaksi.BIAYA_HIDUP
-      | EnumSelectTujuanTransaksi.BISNIS
-      | EnumSelectTujuanTransaksi.DONASI_ATAU_AMAL
-      | EnumSelectTujuanTransaksi.PEMBAYARAN
-      | EnumSelectTujuanTransaksi.PEMBELIAN_BARANG_ATAU_JASA
-      | EnumSelectTujuanTransaksi.TABUNGAN_ATAU_INVESTASI
+      | 'biaya_hidup'
+      | 'bisnis'
+      | 'donasi_atau_amal'
+      | 'pembayaran'
+      | 'pembelian_barang_atau_jasa'
+      | 'tabungan_atau_investasi'
       | '';
 
-    position: IPositionCompoent;
+    position: {
+      biaya_hidup: IPositionCompoent;
+      bisnis: IPositionCompoent;
+      donasi_atau_amal: IPositionCompoent;
+      pembayaran: IPositionCompoent;
+      pembelian_barang_atau_jasa: IPositionCompoent;
+      tabungan_atau_investasi: IPositionCompoent;
+    };
   };
   beritaTransaksi: {
     value: string;

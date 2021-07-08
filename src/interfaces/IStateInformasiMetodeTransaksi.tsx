@@ -22,8 +22,11 @@ export interface IDataTabelInformasiMetodeTransaksi {
 
 export interface IStateInformasiMetodeTransaksi {
   jenisTransaksi: {
-    value: EnumJenisTransaksi.TUNAI | EnumJenisTransaksi.DEBIT_REKENING | '';
-    position: IPositionCompoent;
+    value: 'tunai' | 'debit_rekening' | '';
+    position: {
+      tunai: IPositionCompoent;
+      debit_rekening: IPositionCompoent;
+    };
   };
   cekGiro: {
     value: string;

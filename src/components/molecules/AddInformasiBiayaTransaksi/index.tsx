@@ -4,8 +4,11 @@ import { ReactComponent as CalenderIcon } from 'assets/icons/CalenderIcon.svg';
 import { Button, DropDown, Textfield } from 'components/atoms';
 import {
   INITIAL_STATE,
+  INTIAL_JENIS_TRANSAKSI_METODE_TRANSAKSI,
   optionsSelectBiayaKoresponded,
   optionsSelectJenisTransaksi,
+  INITIAL_BIAYA_BANK_KORESPONDEN,
+  VERSION_LOCAL_STORAGE_FORM_MANDIRI,
 } from 'constant';
 import { EnumJenisTransaksi } from 'enum';
 import { IStateInformasiBiayaTransaksi } from 'interfaces/IStateInformasiBiayaTransaksi';
@@ -19,7 +22,9 @@ interface IProps {
 }
 
 const AddInformasiBiayaTransaksi: React.FC<IProps> = (props): ReactElement => {
-  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal('DataCookieForm');
+  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal(
+    VERSION_LOCAL_STORAGE_FORM_MANDIRI
+  );
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
   const [isDisableFieldLainnya, setIsDisableFieldLainnya] =
     useState<boolean>(false);
@@ -28,13 +33,13 @@ const AddInformasiBiayaTransaksi: React.FC<IProps> = (props): ReactElement => {
     useState<any>({
       jenisTransaksi: DATA_COOKIE_FORM_MANDIRI
         ? DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.jenisTransaksi
-        : INITIAL_STATE,
+        : INTIAL_JENIS_TRANSAKSI_METODE_TRANSAKSI,
       totalBiayaTransaksi: DATA_COOKIE_FORM_MANDIRI
         ? DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.totalBiayaTransaksi
         : INITIAL_STATE,
       biayaBankKoresponden: DATA_COOKIE_FORM_MANDIRI
         ? DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.biayaBankKoresponden
-        : INITIAL_STATE,
+        : INITIAL_BIAYA_BANK_KORESPONDEN,
       lainnya: DATA_COOKIE_FORM_MANDIRI
         ? DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.lainnya
         : INITIAL_STATE,
@@ -115,26 +120,65 @@ const AddInformasiBiayaTransaksi: React.FC<IProps> = (props): ReactElement => {
     positionName: string,
     value: number
   ) => {
-    const category: any = {
-      ...stateInformasiBiayaTransaksi[String(key)],
-    };
-    category['position'] = {
-      ...category['position'],
-      [positionName]: value,
-    };
-    setStateInformasiBiayaTransaksi({
-      ...stateInformasiBiayaTransaksi,
-      [key]: category,
-    });
+    if (key === 'jenisTransaksi' || key === 'biayaBankKoresponden') {
+      setStateInformasiBiayaTransaksi({
+        ...stateInformasiBiayaTransaksi,
+        [key]: {
+          ...stateInformasiBiayaTransaksi[key],
+          position: {
+            ...stateInformasiBiayaTransaksi[key].position,
 
-    const tempStatePositionInformasiBiayaTransaksi: IStateInformasiBiayaTransaksi =
-      {
+            [stateInformasiBiayaTransaksi[key].value]: {
+              ...stateInformasiBiayaTransaksi[key].position[
+                stateInformasiBiayaTransaksi[key].value
+              ],
+              [positionName]: value,
+            },
+          },
+        },
+      });
+      const tempStatePositionInformasiBiayaTransaksi: IStateInformasiBiayaTransaksi =
+        {
+          ...stateInformasiBiayaTransaksi,
+          [key]: {
+            ...stateInformasiBiayaTransaksi[key],
+            position: {
+              ...stateInformasiBiayaTransaksi[key].position,
+
+              [stateInformasiBiayaTransaksi[key].value]: {
+                ...stateInformasiBiayaTransaksi[key].position[
+                  stateInformasiBiayaTransaksi[key].value
+                ],
+                [positionName]: value,
+              },
+            },
+          },
+        };
+      props.changeInformasiBiayaTransaksi(
+        tempStatePositionInformasiBiayaTransaksi
+      );
+    } else {
+      const category: any = {
+        ...stateInformasiBiayaTransaksi[String(key)],
+      };
+      category['position'] = {
+        ...category['position'],
+        [positionName]: value,
+      };
+      setStateInformasiBiayaTransaksi({
         ...stateInformasiBiayaTransaksi,
         [key]: category,
-      };
-    props.changeInformasiBiayaTransaksi(
-      tempStatePositionInformasiBiayaTransaksi
-    );
+      });
+
+      const tempStatePositionInformasiBiayaTransaksi: IStateInformasiBiayaTransaksi =
+        {
+          ...stateInformasiBiayaTransaksi,
+          [key]: category,
+        };
+      props.changeInformasiBiayaTransaksi(
+        tempStatePositionInformasiBiayaTransaksi
+      );
+    }
   };
 
   return (
@@ -162,6 +206,7 @@ const AddInformasiBiayaTransaksi: React.FC<IProps> = (props): ReactElement => {
               }
               handleChange={onChangePositionBiayaTransaksi}
               name='jenisTransaksi'
+              keyActive={stateInformasiBiayaTransaksi.jenisTransaksi.value}
             />
           </Fragment>
           <Fragment>
@@ -193,6 +238,9 @@ const AddInformasiBiayaTransaksi: React.FC<IProps> = (props): ReactElement => {
               }
               handleChange={onChangePositionBiayaTransaksi}
               name='biayaBankKoresponden'
+              keyActive={
+                stateInformasiBiayaTransaksi.biayaBankKoresponden.value
+              }
             />
           </Fragment>
           {isDisableFieldLainnya && (

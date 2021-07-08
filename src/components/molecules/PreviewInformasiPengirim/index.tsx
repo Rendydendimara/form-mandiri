@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
+import IconCheck from 'components/atoms/IconCheck';
 import { IStateInformasiPengirim } from 'interfaces/IStateInformasiPengirim';
 import React, { ReactElement } from 'react';
-import IconCheck from 'components/atoms/IconCheck';
 
 interface IProps {
   data?: IStateInformasiPengirim;
@@ -11,42 +11,89 @@ const PreviewInformasiPengirim: React.FC<IProps> = (props): ReactElement => {
   return (
     <div>
       <div>
-        <Typography
-          style={{
-            position: 'absolute',
-            top: `${props.data?.tipePengirim.position.top}px`,
-            left: `${props.data?.tipePengirim.position.left}px`,
-            bottom: `${props.data?.tipePengirim.position.bottom}px`,
-            right: `${props.data?.tipePengirim.position.right}px`,
-          }}
-          className='textPreviewForm'
-        >
-          {props.data?.tipePengirim.value && <IconCheck />}
-        </Typography>
-        <Typography
-          style={{
-            position: 'absolute',
-            top: `${props.data?.jenisPengirim.position.top}px`,
-            left: `${props.data?.jenisPengirim.position.left}px`,
-            bottom: `${props.data?.jenisPengirim.position.bottom}px`,
-            right: `${props.data?.jenisPengirim.position.right}px`,
-          }}
-          className='textPreviewForm'
-        >
-          {props.data?.jenisPengirim.value && <IconCheck />}
-        </Typography>
-        <Typography
-          style={{
-            position: 'absolute',
-            top: `${props.data?.statusKependudukan.position.top}px`,
-            left: `${props.data?.statusKependudukan.position.left}px`,
-            bottom: `${props.data?.statusKependudukan.position.bottom}px`,
-            right: `${props.data?.statusKependudukan.position.right}px`,
-          }}
-          className='textPreviewForm'
-        >
-          {props.data?.statusKependudukan.value && <IconCheck />}
-        </Typography>
+        {props.data?.tipePengirim.value && (
+          <Typography
+            style={{
+              position: 'absolute',
+              top: props.data?.tipePengirim.position[
+                props.data.tipePengirim.value
+              ].top,
+              left: props.data.tipePengirim.position[
+                props.data.tipePengirim.value
+              ].left,
+              bottom:
+                props.data.tipePengirim.position[props.data.tipePengirim.value]
+                  .bottom,
+              right:
+                props.data.tipePengirim.position[props.data.tipePengirim.value]
+                  .right,
+            }}
+            className='textPreviewForm'
+          >
+            <IconCheck />
+          </Typography>
+        )}
+        {props.data?.jenisPengirim.value && (
+          <Typography
+            style={{
+              position: 'absolute',
+              top: props.data?.jenisPengirim.value
+                ? props.data.jenisPengirim.position[
+                    props.data.jenisPengirim.value
+                  ].top
+                : props.data.jenisPengirim.position.perorangan.top + 'px',
+              left: props.data?.jenisPengirim.value
+                ? props.data.jenisPengirim.position[
+                    props.data.jenisPengirim.value
+                  ].left
+                : props.data.jenisPengirim.position.perorangan.left + 'px',
+              bottom: props.data?.jenisPengirim.value
+                ? props.data.jenisPengirim.position[
+                    props.data.jenisPengirim.value
+                  ].bottom
+                : props.data.jenisPengirim.position.perorangan.bottom + 'px',
+              right: props.data?.jenisPengirim.value
+                ? props.data.jenisPengirim.position[
+                    props.data.jenisPengirim.value
+                  ].right
+                : props.data.jenisPengirim.position.perorangan.right + 'px',
+            }}
+            className='textPreviewForm'
+          >
+            <IconCheck />
+          </Typography>
+        )}
+        {props.data?.statusKependudukan.value && (
+          <Typography
+            style={{
+              position: 'absolute',
+              top: props.data?.statusKependudukan.value
+                ? props.data.statusKependudukan.position[
+                    props.data.statusKependudukan.value
+                  ].top
+                : props.data.statusKependudukan.position.penduduk.top + 'px',
+              left: props.data?.statusKependudukan.value
+                ? props.data.statusKependudukan.position[
+                    props.data.statusKependudukan.value
+                  ].left
+                : props.data.statusKependudukan.position.penduduk.left + 'px',
+              bottom: props.data?.statusKependudukan.value
+                ? props.data.statusKependudukan.position[
+                    props.data.statusKependudukan.value
+                  ].bottom
+                : props.data.statusKependudukan.position.penduduk.bottom + 'px',
+              right: props.data?.statusKependudukan.value
+                ? props.data.statusKependudukan.position[
+                    props.data.statusKependudukan.value
+                  ].right
+                : props.data.statusKependudukan.position.penduduk.right + 'px',
+            }}
+            className='textPreviewForm'
+          >
+            <IconCheck />
+          </Typography>
+        )}
+
         <Typography
           style={{
             position: 'absolute',

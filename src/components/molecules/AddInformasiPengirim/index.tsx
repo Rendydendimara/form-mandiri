@@ -2,22 +2,20 @@ import { Collapse } from '@material-ui/core';
 import { ReactComponent as AddIcon } from 'assets/icons/AddIcon.svg';
 import { ReactComponent as CalenderIcon } from 'assets/icons/CalenderIcon.svg';
 import { Button, DropDown, Textfield } from 'components/atoms';
+import InputPositionComponent from 'components/molecules/InputPositionComponent';
 import {
   INITIAL_STATE,
+  INITIAL_STATE_STATUS_KEPENDUDUKAN,
+  INITIAL_STATE_TIPE_PENGIRIM,
   optionsJenisPengirim,
   optionsStatusKependudukan,
   optionsTipePengirim,
+  VERSION_LOCAL_STORAGE_FORM_MANDIRI,
 } from 'constant';
-import {
-  EnumSelectJenisPengirim,
-  EnumStatusKependudukan,
-  EnumTipePengirim,
-} from 'enum';
-import { IStateInformasiPengirim } from 'interfaces/IStateInformasiPengirim';
-import React, { Fragment, ReactElement, useState } from 'react';
-import InputPositionComponent from 'components/molecules/InputPositionComponent';
-import { getLocal } from 'local/localStorage';
 import { IDataGlobal } from 'interfaces/IDataGlobal';
+import { IStateInformasiPengirim } from 'interfaces/IStateInformasiPengirim';
+import { getLocal } from 'local/localStorage';
+import React, { Fragment, ReactElement, useState } from 'react';
 
 interface IProps {
   changeInformasiPengirim: (data: IStateInformasiPengirim) => void;
@@ -25,11 +23,13 @@ interface IProps {
 
 const AddInformasiPengirima: React.FC<IProps> = (props): ReactElement => {
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
-  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal('DataCookieForm');
+  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal(
+    VERSION_LOCAL_STORAGE_FORM_MANDIRI
+  );
   const [stateInformasiPengirim, setStateInformasiPengirim] = useState<any>({
     tipePengirim: DATA_COOKIE_FORM_MANDIRI
       ? DATA_COOKIE_FORM_MANDIRI.informasiPengirim.tipePengirim
-      : INITIAL_STATE,
+      : INITIAL_STATE_TIPE_PENGIRIM,
     nikOrPassporOrNpwpPerusahaan: DATA_COOKIE_FORM_MANDIRI
       ? DATA_COOKIE_FORM_MANDIRI.informasiPengirim.nikOrPassporOrNpwpPerusahaan
       : INITIAL_STATE,
@@ -38,7 +38,7 @@ const AddInformasiPengirima: React.FC<IProps> = (props): ReactElement => {
       : INITIAL_STATE,
     statusKependudukan: DATA_COOKIE_FORM_MANDIRI
       ? DATA_COOKIE_FORM_MANDIRI.informasiPengirim.statusKependudukan
-      : INITIAL_STATE,
+      : INITIAL_STATE_STATUS_KEPENDUDUKAN,
     namaPengirim: DATA_COOKIE_FORM_MANDIRI
       ? DATA_COOKIE_FORM_MANDIRI.informasiPengirim.namaPengirim
       : INITIAL_STATE,
@@ -74,10 +74,7 @@ const AddInformasiPengirima: React.FC<IProps> = (props): ReactElement => {
 
   const handleChangeSelectJenisPengirim = async (
     event: React.ChangeEvent<{
-      value:
-        | EnumSelectJenisPengirim.PERORANGAN
-        | EnumSelectJenisPengirim.PERUSAHAAN
-        | EnumSelectJenisPengirim.PEMERINTAH;
+      value: 'pemerintah' | 'perorangan' | 'perusahaan';
     }>
   ): Promise<void> => {
     setStateInformasiPengirim({
@@ -99,7 +96,7 @@ const AddInformasiPengirima: React.FC<IProps> = (props): ReactElement => {
 
   const handleChangeSelectTipePengirim = async (
     event: React.ChangeEvent<{
-      value: EnumTipePengirim.NASABAH | EnumTipePengirim.NONSABAH;
+      value: 'nasabah' | 'non_nasabah';
     }>
   ): Promise<void> => {
     setStateInformasiPengirim({
@@ -121,9 +118,7 @@ const AddInformasiPengirima: React.FC<IProps> = (props): ReactElement => {
 
   const handleChangeSelectStatusKependudukan = async (
     event: React.ChangeEvent<{
-      value:
-        | EnumStatusKependudukan.PENDUDUK
-        | EnumStatusKependudukan.BUKAN_PENDUDUK;
+      value: 'penduduk' | 'bukan_penduduk';
     }>
   ): Promise<void> => {
     setStateInformasiPengirim({
@@ -148,22 +143,62 @@ const AddInformasiPengirima: React.FC<IProps> = (props): ReactElement => {
     positionName: string,
     value: number
   ) => {
-    const category: any = {
-      ...stateInformasiPengirim[String(key)],
-    };
-    category['position'] = {
-      ...category['position'],
-      [positionName]: value,
-    };
-    setStateInformasiPengirim({
-      ...stateInformasiPengirim,
-      [key]: category,
-    });
-    const tempStatePositionInformasiPengirim: IStateInformasiPengirim = {
-      ...stateInformasiPengirim,
-      [key]: category,
-    };
-    props.changeInformasiPengirim(tempStatePositionInformasiPengirim);
+    if (
+      key === 'tipePengirim' ||
+      key === 'jenisPengirim' ||
+      key === 'statusKependudukan'
+    ) {
+      setStateInformasiPengirim({
+        ...stateInformasiPengirim,
+        [key]: {
+          ...stateInformasiPengirim[key],
+          position: {
+            ...stateInformasiPengirim[key].position,
+
+            [stateInformasiPengirim[key].value]: {
+              ...stateInformasiPengirim[key].position[
+                stateInformasiPengirim[key].value
+              ],
+              [positionName]: value,
+            },
+          },
+        },
+      });
+      const tempStatePositionInformasiPengirim: IStateInformasiPengirim = {
+        ...stateInformasiPengirim,
+        [key]: {
+          ...stateInformasiPengirim[key],
+          position: {
+            ...stateInformasiPengirim[key].position,
+
+            [stateInformasiPengirim[key].value]: {
+              ...stateInformasiPengirim[key].position[
+                stateInformasiPengirim[key].value
+              ],
+              [positionName]: value,
+            },
+          },
+        },
+      };
+      props.changeInformasiPengirim(tempStatePositionInformasiPengirim);
+    } else {
+      const category: any = {
+        ...stateInformasiPengirim[String(key)],
+      };
+      category['position'] = {
+        ...category['position'],
+        [positionName]: value,
+      };
+      setStateInformasiPengirim({
+        ...stateInformasiPengirim,
+        [key]: category,
+      });
+      const tempStatePositionInformasiPengirim: IStateInformasiPengirim = {
+        ...stateInformasiPengirim,
+        [key]: category,
+      };
+      props.changeInformasiPengirim(tempStatePositionInformasiPengirim);
+    }
   };
 
   return (
@@ -189,6 +224,7 @@ const AddInformasiPengirima: React.FC<IProps> = (props): ReactElement => {
               dataPosition={stateInformasiPengirim.tipePengirim.position}
               handleChange={onChangePositionComponent}
               name='tipePengirim'
+              keyActive={stateInformasiPengirim.tipePengirim.value}
             />
           </Fragment>
           <Fragment>
@@ -202,6 +238,7 @@ const AddInformasiPengirima: React.FC<IProps> = (props): ReactElement => {
               dataPosition={stateInformasiPengirim.jenisPengirim.position}
               handleChange={onChangePositionComponent}
               name='jenisPengirim'
+              keyActive={stateInformasiPengirim.jenisPengirim.value}
             />
           </Fragment>
           <Fragment>
@@ -215,6 +252,7 @@ const AddInformasiPengirima: React.FC<IProps> = (props): ReactElement => {
               dataPosition={stateInformasiPengirim.statusKependudukan.position}
               handleChange={onChangePositionComponent}
               name='statusKependudukan'
+              keyActive={stateInformasiPengirim.statusKependudukan.value}
             />
           </Fragment>
           <Fragment>

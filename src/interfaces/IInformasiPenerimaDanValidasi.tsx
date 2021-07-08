@@ -32,13 +32,20 @@ export interface IInformasiPenerimaDanValidasi {
       | EnumSelectJenisPenerima.PERUSAHAAN
       | EnumSelectJenisPenerima.PEMERINTAH
       | '';
-    position: IPositionCompoent;
+    position: {
+      perorangan: IPositionCompoent;
+      perusahaan: IPositionCompoent;
+      pemerintah: IPositionCompoent;
+    };
   };
   statusKependudukan: {
     value:
       | EnumStatusKependudukan.PENDUDUK
       | EnumStatusKependudukan.BUKAN_PENDUDUK
       | '';
-    position: IPositionCompoent;
+    position: {
+      penduduk: IPositionCompoent;
+      bukan_penduduk: IPositionCompoent;
+    };
   };
 }

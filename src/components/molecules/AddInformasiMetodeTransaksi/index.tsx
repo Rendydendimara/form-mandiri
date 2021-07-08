@@ -2,13 +2,17 @@ import { Collapse } from '@material-ui/core';
 import { ReactComponent as AddIcon } from 'assets/icons/AddIcon.svg';
 import { ReactComponent as CalenderIcon } from 'assets/icons/CalenderIcon.svg';
 import { Button, DropDown, Textfield } from 'components/atoms';
-import { INITIAL_STATE, optionsSelectJenisTransaksi } from 'constant';
-import { EnumJenisTransaksi } from 'enum';
-import { IStateInformasiMetodeTransaksi } from 'interfaces/IStateInformasiMetodeTransaksi';
-import React, { Fragment, ReactElement, useState } from 'react';
 import InputPositionComponent from 'components/molecules/InputPositionComponent';
-import { getLocal } from 'local/localStorage';
+import {
+  INITIAL_STATE,
+  INTIAL_JENIS_TRANSAKSI_METODE_TRANSAKSI,
+  optionsSelectJenisTransaksi,
+  VERSION_LOCAL_STORAGE_FORM_MANDIRI,
+} from 'constant';
 import { IDataGlobal } from 'interfaces/IDataGlobal';
+import { IStateInformasiMetodeTransaksi } from 'interfaces/IStateInformasiMetodeTransaksi';
+import { getLocal } from 'local/localStorage';
+import React, { Fragment, ReactElement, useState } from 'react';
 
 interface IProps {
   changeInformasiMetodeTransaksi: (
@@ -17,13 +21,15 @@ interface IProps {
 }
 
 const AddInformasiMetodeTransaksi: React.FC<IProps> = (props): ReactElement => {
-  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal('DataCookieForm');
+  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal(
+    VERSION_LOCAL_STORAGE_FORM_MANDIRI
+  );
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
   const [stateInformasiMetodeTransaksi, setStateInformasiMetodeTransaksi] =
     useState<any>({
       jenisTransaksi: DATA_COOKIE_FORM_MANDIRI
         ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.jenisTransaksi
-        : INITIAL_STATE,
+        : INTIAL_JENIS_TRANSAKSI_METODE_TRANSAKSI,
       cekGiro: DATA_COOKIE_FORM_MANDIRI
         ? DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.cekGiro
         : INITIAL_STATE,
@@ -79,12 +85,12 @@ const AddInformasiMetodeTransaksi: React.FC<IProps> = (props): ReactElement => {
 
   const handleChangeSelectJenisTransaksi = async (
     event: React.ChangeEvent<{
-      value: EnumJenisTransaksi.DEBIT_REKENING | EnumJenisTransaksi.TUNAI | '';
+      value: 'debit_rekening' | 'tunai' | '';
     }>
   ): Promise<void> => {
     if (
-      event.target.value === EnumJenisTransaksi.TUNAI ||
-      event.target.value === EnumJenisTransaksi.DEBIT_REKENING
+      event.target.value === 'tunai' ||
+      event.target.value === 'debit_rekening'
     ) {
       setStateInformasiMetodeTransaksi({
         ...stateInformasiMetodeTransaksi,
@@ -171,75 +177,104 @@ const AddInformasiMetodeTransaksi: React.FC<IProps> = (props): ReactElement => {
     positionName: string,
     value: number
   ) => {
-    const arrayInputName = key.split(' ');
-    if (arrayInputName.length > 1) {
-      if (arrayInputName[1] === '1') {
-        const category: any = {
-          ...stateInformasiMetodeTransaksi.dataTabel[0][
-            String(arrayInputName[0])
-          ],
-        };
-        category['position'] = {
-          ...category['position'],
-          [positionName]: value,
-        };
-        setStateInformasiMetodeTransaksi({
-          ...stateInformasiMetodeTransaksi,
-          dataTabel: [
-            {
-              ...stateInformasiMetodeTransaksi.dataTabel[0],
-              [arrayInputName[0]]: category,
-            },
-            stateInformasiMetodeTransaksi.dataTabel[1],
-          ],
-        });
-      } else if (arrayInputName[1] === '2') {
-        const category: any = {
-          ...stateInformasiMetodeTransaksi.dataTabel[1][
-            String(arrayInputName[0])
-          ],
-        };
-        category['position'] = {
-          ...category['position'],
-          [positionName]: value,
-        };
-        setStateInformasiMetodeTransaksi({
-          ...stateInformasiMetodeTransaksi,
-          dataTabel: [
-            stateInformasiMetodeTransaksi.dataTabel[0],
-            {
-              ...stateInformasiMetodeTransaksi.dataTabel[1],
-              [arrayInputName[0]]: category,
-            },
-          ],
-        });
-      }
-    } else {
-      const category: any = {
-        ...stateInformasiMetodeTransaksi[String(key)],
-      };
-      category['position'] = {
-        ...category['position'],
-        [positionName]: value,
-      };
+    if (key === 'jenisTransaksi') {
       setStateInformasiMetodeTransaksi({
         ...stateInformasiMetodeTransaksi,
-        [key]: category,
+        [key]: {
+          ...stateInformasiMetodeTransaksi[key],
+          position: {
+            ...stateInformasiMetodeTransaksi[key].position,
+
+            [stateInformasiMetodeTransaksi[key].value]: {
+              ...stateInformasiMetodeTransaksi[key].position[
+                stateInformasiMetodeTransaksi[key].value
+              ],
+              [positionName]: value,
+            },
+          },
+        },
       });
-    }
 
-    let cloneStateInformasiMetodeTransaksi: IStateInformasiMetodeTransaksi = {
-      ...stateInformasiMetodeTransaksi,
-    };
-    await setStateInformasiMetodeTransaksi(
-      (prevState: IStateInformasiMetodeTransaksi) => {
-        cloneStateInformasiMetodeTransaksi = prevState;
-        return prevState;
+      let cloneStateInformasiMetodeTransaksi: IStateInformasiMetodeTransaksi = {
+        ...stateInformasiMetodeTransaksi,
+      };
+      await setStateInformasiMetodeTransaksi(
+        (prevState: IStateInformasiMetodeTransaksi) => {
+          cloneStateInformasiMetodeTransaksi = prevState;
+          return prevState;
+        }
+      );
+      props.changeInformasiMetodeTransaksi(cloneStateInformasiMetodeTransaksi);
+    } else {
+      const arrayInputName = key.split(' ');
+      if (arrayInputName.length > 1) {
+        if (arrayInputName[1] === '1') {
+          const category: any = {
+            ...stateInformasiMetodeTransaksi.dataTabel[0][
+              String(arrayInputName[0])
+            ],
+          };
+          category['position'] = {
+            ...category['position'],
+            [positionName]: value,
+          };
+          setStateInformasiMetodeTransaksi({
+            ...stateInformasiMetodeTransaksi,
+            dataTabel: [
+              {
+                ...stateInformasiMetodeTransaksi.dataTabel[0],
+                [arrayInputName[0]]: category,
+              },
+              stateInformasiMetodeTransaksi.dataTabel[1],
+            ],
+          });
+        } else if (arrayInputName[1] === '2') {
+          const category: any = {
+            ...stateInformasiMetodeTransaksi.dataTabel[1][
+              String(arrayInputName[0])
+            ],
+          };
+          category['position'] = {
+            ...category['position'],
+            [positionName]: value,
+          };
+          setStateInformasiMetodeTransaksi({
+            ...stateInformasiMetodeTransaksi,
+            dataTabel: [
+              stateInformasiMetodeTransaksi.dataTabel[0],
+              {
+                ...stateInformasiMetodeTransaksi.dataTabel[1],
+                [arrayInputName[0]]: category,
+              },
+            ],
+          });
+        }
+      } else {
+        const category: any = {
+          ...stateInformasiMetodeTransaksi[String(key)],
+        };
+        category['position'] = {
+          ...category['position'],
+          [positionName]: value,
+        };
+        setStateInformasiMetodeTransaksi({
+          ...stateInformasiMetodeTransaksi,
+          [key]: category,
+        });
       }
-    );
-    props.changeInformasiMetodeTransaksi(cloneStateInformasiMetodeTransaksi);
-  };
 
+      let cloneStateInformasiMetodeTransaksi: IStateInformasiMetodeTransaksi = {
+        ...stateInformasiMetodeTransaksi,
+      };
+      await setStateInformasiMetodeTransaksi(
+        (prevState: IStateInformasiMetodeTransaksi) => {
+          cloneStateInformasiMetodeTransaksi = prevState;
+          return prevState;
+        }
+      );
+      props.changeInformasiMetodeTransaksi(cloneStateInformasiMetodeTransaksi);
+    }
+  };
   return (
     <div>
       <Button
@@ -265,6 +300,7 @@ const AddInformasiMetodeTransaksi: React.FC<IProps> = (props): ReactElement => {
               }
               handleChange={onChangePositionComponent}
               name='jenisTransaksi'
+              keyActive={stateInformasiMetodeTransaksi.jenisTransaksi.value}
             />
           </Fragment>
           <Fragment>

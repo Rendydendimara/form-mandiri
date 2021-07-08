@@ -6,7 +6,6 @@ import IconCheck from 'components/atoms/IconCheck';
 interface IProps {
   data?: IStateFormInformasiUmum;
 }
-
 const PreviewInformasiUmum: React.FC<IProps> = (props): ReactElement => {
   return (
     <div>
@@ -23,18 +22,33 @@ const PreviewInformasiUmum: React.FC<IProps> = (props): ReactElement => {
         >
           {props.data?.tanggal.value}
         </Typography>
-        <Typography
-          style={{
-            position: 'absolute',
-            top: `${props.data?.jenisTransaksi.position.top}px`,
-            left: `${props.data?.jenisTransaksi.position.left}px`,
-            bottom: `${props.data?.jenisTransaksi.position.bottom}px`,
-            right: `${props.data?.jenisTransaksi.position.right}px`,
-          }}
-          className='textPreviewForm'
-        >
-          {props.data?.jenisTransaksi.value && <IconCheck />}
-        </Typography>
+        {props.data?.jenisTransaksi.value && (
+          <Typography
+            style={{
+              position: 'absolute',
+              top: props.data?.jenisTransaksi.value
+                ? props.data.jenisTransaksi.position[
+                    props.data.jenisTransaksi.value
+                  ].top
+                : props.data.jenisTransaksi.position.rtgs + 'px',
+              left:
+                props.data?.jenisTransaksi.position[
+                  props.data?.jenisTransaksi.value
+                ].left + 'px',
+              bottom:
+                props.data?.jenisTransaksi.position[
+                  props.data?.jenisTransaksi.value
+                ].bottom + 'px',
+              right:
+                props.data?.jenisTransaksi.position[
+                  props.data?.jenisTransaksi.value
+                ].right + 'px',
+            }}
+            className='textPreviewForm'
+          >
+            <IconCheck />
+          </Typography>
+        )}
       </div>
     </div>
   );

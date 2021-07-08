@@ -1,4 +1,9 @@
-import { DEFAULT_DATA_AND_POSITION, INITIAL_STATE } from 'constant';
+import {
+  DEFAULT_DATA_AND_POSITION,
+  INITIAL_STATE,
+  INITIAL_STATE_JENIS_TRANSAKSI,
+  VERSION_LOCAL_STORAGE_FORM_MANDIRI,
+} from 'constant';
 import { IInformasiPenerimaDanValidasi } from 'interfaces/IInformasiPenerimaDanValidasi';
 import { IStateFormInformasiSumberDanaTransaksi } from 'interfaces/IStateFormInformasiSumberDanaTransaksi';
 import { IStateFormInformasiTransaksi } from 'interfaces/IStateFormInformasiTransaksi';
@@ -22,12 +27,12 @@ const SIDEBARCOMPONENT = lazy(
 
 const HomePage: React.FC<IProps> = (): ReactElement => {
   const classes = useStyles();
-  const DATA_COOKIE_FORM_MANDIRI = getLocal('DataCookieForm');
+  const DATA_COOKIE_FORM_MANDIRI = getLocal(VERSION_LOCAL_STORAGE_FORM_MANDIRI);
   const [dataGlobal, setDataGlobal] = useState<any>(
     DATA_COOKIE_FORM_MANDIRI || {
       informasiUmum: {
         tanggal: INITIAL_STATE,
-        jenisTransaksi: INITIAL_STATE,
+        jenisTransaksi: INITIAL_STATE_JENIS_TRANSAKSI,
       },
       informasiPenerimaDanValidasi: {
         validasi: INITIAL_STATE,
@@ -98,14 +103,16 @@ const HomePage: React.FC<IProps> = (): ReactElement => {
       ...dataGlobal,
       [type]: data,
     });
-    setLocal('DataCookieForm', {
+    setLocal(VERSION_LOCAL_STORAGE_FORM_MANDIRI, {
       ...dataGlobal,
       [type]: data,
     });
   };
   const handleResetDataForm = (): void => {
-    setLocal('DataCookieForm', DEFAULT_DATA_AND_POSITION);
-    const DATA_COOKIE_FORM_MANDIRI = getLocal('DataCookieForm');
+    setLocal(VERSION_LOCAL_STORAGE_FORM_MANDIRI, DEFAULT_DATA_AND_POSITION);
+    const DATA_COOKIE_FORM_MANDIRI = getLocal(
+      VERSION_LOCAL_STORAGE_FORM_MANDIRI
+    );
     setDataGlobal(DATA_COOKIE_FORM_MANDIRI);
     window.location.reload();
   };

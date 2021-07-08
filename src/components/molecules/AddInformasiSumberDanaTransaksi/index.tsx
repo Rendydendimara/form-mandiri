@@ -2,13 +2,16 @@ import { Collapse } from '@material-ui/core';
 import { ReactComponent as AddIcon } from 'assets/icons/AddIcon.svg';
 import { ReactComponent as CalenderIcon } from 'assets/icons/CalenderIcon.svg';
 import { Button, DropDown } from 'components/atoms';
-import { INITIAL_STATE, optionsSelectSumberDanaTransaksi } from 'constant';
-import { EnumSumberDanaTransaksi } from 'enum';
-import { IStateFormInformasiSumberDanaTransaksi } from 'interfaces/IStateFormInformasiSumberDanaTransaksi';
-import React, { ReactElement, useState } from 'react';
 import InputPositionComponent from 'components/molecules/InputPositionComponent';
-import { getLocal } from 'local/localStorage';
+import {
+  INITIAL_STATE_SUMBER_DANA_TRANKSASI,
+  optionsSelectSumberDanaTransaksi,
+  VERSION_LOCAL_STORAGE_FORM_MANDIRI,
+} from 'constant';
 import { IDataGlobal } from 'interfaces/IDataGlobal';
+import { IStateFormInformasiSumberDanaTransaksi } from 'interfaces/IStateFormInformasiSumberDanaTransaksi';
+import { getLocal } from 'local/localStorage';
+import React, { ReactElement, useState } from 'react';
 
 interface IProps {
   changeInformasiSumberDanaTransaksi: (
@@ -19,7 +22,9 @@ interface IProps {
 const AddInformasiSumberDanaTransaksi: React.FC<IProps> = (
   props
 ): ReactElement => {
-  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal('DataCookieForm');
+  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal(
+    VERSION_LOCAL_STORAGE_FORM_MANDIRI
+  );
   const [
     stateInformasiSumberDanaTransaksi,
     setStateInformasiSumberDanaTransaksi,
@@ -27,7 +32,7 @@ const AddInformasiSumberDanaTransaksi: React.FC<IProps> = (
     sumberDanaTransaksi: DATA_COOKIE_FORM_MANDIRI
       ? DATA_COOKIE_FORM_MANDIRI.informasiSumberDanaTransaksi
           .sumberDanaTransaksi
-      : INITIAL_STATE,
+      : INITIAL_STATE_SUMBER_DANA_TRANKSASI,
   });
   const [isOpenForm, setIsOpenForm] = useState<boolean>(false);
 
@@ -38,14 +43,14 @@ const AddInformasiSumberDanaTransaksi: React.FC<IProps> = (
   const handleChangeSelectSumberDanaTransaksi = async (
     event: React.ChangeEvent<{
       value:
-        | EnumSumberDanaTransaksi.DANA_PEMERINTAH
-        | EnumSumberDanaTransaksi.GAJI_PENGHASILAN
-        | EnumSumberDanaTransaksi.HASIL_USAHA
-        | EnumSumberDanaTransaksi.HIBAH_HADIAH
-        | EnumSumberDanaTransaksi.PENJUALAN_ASSET
-        | EnumSumberDanaTransaksi.SUMBANGAN
-        | EnumSumberDanaTransaksi.TABUNGAN_HASIL_INVESTASI
-        | EnumSumberDanaTransaksi.WARISAN;
+        | 'dana_pemerintah'
+        | 'gaji_penghasilan'
+        | 'hasil_usaha'
+        | 'hibah_hadiah'
+        | 'penjualan_asset'
+        | 'sumbangan'
+        | 'tabungan_hasil_investasi'
+        | 'warisan';
     }>
   ): Promise<void> => {
     setStateInformasiSumberDanaTransaksi({
@@ -74,22 +79,38 @@ const AddInformasiSumberDanaTransaksi: React.FC<IProps> = (
     positionName: string,
     value: number
   ) => {
-    const category: any = {
-      ...stateInformasiSumberDanaTransaksi[String(key)],
-    };
-    category['position'] = {
-      ...category['position'],
-      [positionName]: value,
-    };
     setStateInformasiSumberDanaTransaksi({
       ...stateInformasiSumberDanaTransaksi,
-      [key]: category,
-    });
+      [key]: {
+        ...stateInformasiSumberDanaTransaksi[key],
+        position: {
+          ...stateInformasiSumberDanaTransaksi[key].position,
 
+          [stateInformasiSumberDanaTransaksi[key].value]: {
+            ...stateInformasiSumberDanaTransaksi[key].position[
+              stateInformasiSumberDanaTransaksi[key].value
+            ],
+            [positionName]: value,
+          },
+        },
+      },
+    });
     const tempStatePositionInformasiBiayaTransaksi: IStateFormInformasiSumberDanaTransaksi =
       {
         ...stateInformasiSumberDanaTransaksi,
-        [key]: category,
+        [key]: {
+          ...stateInformasiSumberDanaTransaksi[key],
+          position: {
+            ...stateInformasiSumberDanaTransaksi[key].position,
+
+            [stateInformasiSumberDanaTransaksi[key].value]: {
+              ...stateInformasiSumberDanaTransaksi[key].position[
+                stateInformasiSumberDanaTransaksi[key].value
+              ],
+              [positionName]: value,
+            },
+          },
+        },
       };
     props.changeInformasiSumberDanaTransaksi(
       tempStatePositionInformasiBiayaTransaksi
@@ -119,6 +140,9 @@ const AddInformasiSumberDanaTransaksi: React.FC<IProps> = (
             }
             handleChange={onChangePositionSumberDanaTransaksi}
             name='sumberDanaTransaksi'
+            keyActive={
+              stateInformasiSumberDanaTransaksi.sumberDanaTransaksi.value
+            }
           />
         </div>
       </Collapse>

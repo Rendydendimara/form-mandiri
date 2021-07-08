@@ -12,18 +12,30 @@ const PreviewInformasiSumberDanaTransaksi: React.FC<IProps> = (
   return (
     <div>
       <div>
-        <Typography
-          style={{
-            position: 'absolute',
-            top: `${props.data?.sumberDanaTransaksi.position.top}px`,
-            left: `${props.data?.sumberDanaTransaksi.position.left}px`,
-            bottom: `${props.data?.sumberDanaTransaksi.position.bottom}px`,
-            right: `${props.data?.sumberDanaTransaksi.position.right}px`,
-          }}
-          className='textPreviewForm'
-        >
-          {props.data?.sumberDanaTransaksi.value && <IconCheck />}
-        </Typography>
+        {props.data?.sumberDanaTransaksi.value && (
+          <Typography
+            style={{
+              position: 'absolute',
+              top: props.data?.sumberDanaTransaksi.position[
+                props.data.sumberDanaTransaksi.value
+              ].top,
+              left: props.data.sumberDanaTransaksi.position[
+                props.data.sumberDanaTransaksi.value
+              ].left,
+              bottom:
+                props.data.sumberDanaTransaksi.position[
+                  props.data.sumberDanaTransaksi.value
+                ].bottom,
+              right:
+                props.data.sumberDanaTransaksi.position[
+                  props.data.sumberDanaTransaksi.value
+                ].right,
+            }}
+            className='textPreviewForm'
+          >
+            <IconCheck />
+          </Typography>
+        )}
       </div>
     </div>
   );

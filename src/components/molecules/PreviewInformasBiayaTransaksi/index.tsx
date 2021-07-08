@@ -13,18 +13,31 @@ const PreviewInformasBiayaTransaksi: React.FC<IProps> = (
   return (
     <div>
       <div>
-        <Typography
-          style={{
-            position: 'absolute',
-            top: `${props.data?.jenisTransaksi.position.top}px`,
-            left: `${props.data?.jenisTransaksi.position.left}px`,
-            bottom: `${props.data?.jenisTransaksi.position.bottom}px`,
-            right: `${props.data?.jenisTransaksi.position.right}px`,
-          }}
-          className='textPreviewForm'
-        >
-          {props.data?.jenisTransaksi.value && <IconCheck />}
-        </Typography>
+        {props.data?.jenisTransaksi.value && (
+          <Typography
+            style={{
+              position: 'absolute',
+              top: props.data?.jenisTransaksi.position[
+                props.data.jenisTransaksi.value
+              ].top,
+              left: props.data.jenisTransaksi.position[
+                props.data.jenisTransaksi.value
+              ].left,
+              bottom:
+                props.data.jenisTransaksi.position[
+                  props.data.jenisTransaksi.value
+                ].bottom,
+              right:
+                props.data.jenisTransaksi.position[
+                  props.data.jenisTransaksi.value
+                ].right,
+            }}
+            className='textPreviewForm'
+          >
+            <IconCheck />
+          </Typography>
+        )}
+
         <Typography
           style={{
             position: 'absolute',
@@ -38,18 +51,30 @@ const PreviewInformasBiayaTransaksi: React.FC<IProps> = (
         >
           {props.data?.totalBiayaTransaksi.value}
         </Typography>
-        <Typography
-          style={{
-            position: 'absolute',
-            top: `${props.data?.biayaBankKoresponden.position.top}px`,
-            left: `${props.data?.biayaBankKoresponden.position.left}px`,
-            bottom: `${props.data?.biayaBankKoresponden.position.bottom}px`,
-            right: `${props.data?.biayaBankKoresponden.position.right}px`,
-          }}
-          className='textPreviewForm'
-        >
-          {props.data?.biayaBankKoresponden.value && <IconCheck />}
-        </Typography>
+        {props.data?.biayaBankKoresponden.value && (
+          <Typography
+            style={{
+              position: 'absolute',
+              top: props.data?.biayaBankKoresponden.position[
+                props.data.biayaBankKoresponden.value
+              ].top,
+              left: props.data.biayaBankKoresponden.position[
+                props.data.biayaBankKoresponden.value
+              ].left,
+              bottom:
+                props.data.biayaBankKoresponden.position[
+                  props.data.biayaBankKoresponden.value
+                ].bottom,
+              right:
+                props.data.biayaBankKoresponden.position[
+                  props.data.biayaBankKoresponden.value
+                ].right,
+            }}
+            className='textPreviewForm'
+          >
+            <IconCheck />
+          </Typography>
+        )}
         <Typography
           style={{
             position: 'absolute',

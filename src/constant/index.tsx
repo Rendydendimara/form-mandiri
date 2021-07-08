@@ -20,40 +20,49 @@ import {
   ISelectTujuanTransaksi,
 } from 'interfaces/ISelect';
 
+export const KEY_TUJUAN_TRANSAKSI = {
+  BIAYA_HIDUP: 'biaya_hidup',
+  BISNIS: 'bisnis',
+  DONASI_ATAU_AMAL: 'donasi_atau_amal',
+  PEMBAYARAN: 'pembayaran',
+  PEMBELIAN_BARANG_ATAU_JASA: 'pembelian_barang_atau_jasa',
+  TABUNGAN_ATAU_INVESTASI: 'tabungan_atau_investasi',
+};
+
 export const optionsSelecteTujuanTransaksi: ISelectTujuanTransaksi[] = [
   {
-    value: EnumSelectTujuanTransaksi.BIAYA_HIDUP,
+    value: 'biaya_hidup',
     item: EnumSelectTujuanTransaksi.BIAYA_HIDUP,
   },
   {
-    value: EnumSelectTujuanTransaksi.BISNIS,
+    value: 'bisnis',
     item: EnumSelectTujuanTransaksi.BISNIS,
   },
   {
-    value: EnumSelectTujuanTransaksi.DONASI_ATAU_AMAL,
+    value: 'donasi_atau_amal',
     item: EnumSelectTujuanTransaksi.DONASI_ATAU_AMAL,
   },
   {
-    value: EnumSelectTujuanTransaksi.PEMBAYARAN,
+    value: 'pembayaran',
     item: EnumSelectTujuanTransaksi.PEMBAYARAN,
   },
   {
-    value: EnumSelectTujuanTransaksi.PEMBELIAN_BARANG_ATAU_JASA,
+    value: 'pembelian_barang_atau_jasa',
     item: EnumSelectTujuanTransaksi.PEMBELIAN_BARANG_ATAU_JASA,
   },
   {
-    value: EnumSelectTujuanTransaksi.TABUNGAN_ATAU_INVESTASI,
+    value: 'tabungan_atau_investasi',
     item: EnumSelectTujuanTransaksi.TABUNGAN_ATAU_INVESTASI,
   },
 ];
 
 export const optionsSelectJenisTransaksi: ISelectJenisTransaksi[] = [
   {
-    value: EnumJenisTransaksi.DEBIT_REKENING,
+    value: 'debit_rekening',
     item: EnumJenisTransaksi.DEBIT_REKENING,
   },
   {
-    value: EnumJenisTransaksi.TUNAI,
+    value: 'tunai',
     item: EnumJenisTransaksi.TUNAI,
   },
 ];
@@ -116,11 +125,11 @@ export const optionsJenisPengirim: ISelectJenisPengirim[] = [
 
 export const optionsTipePengirim: ISelectTipePengirim[] = [
   {
-    value: EnumTipePengirim.NASABAH,
+    value: 'nasabah',
     item: EnumTipePengirim.NASABAH,
   },
   {
-    value: EnumTipePengirim.NONSABAH,
+    value: 'non_nasabah',
     item: EnumTipePengirim.NONSABAH,
   },
 ];
@@ -138,38 +147,92 @@ export const optionsStatusKependudukan: ISelectStatusKependudukan[] = [
 export const optionsSelectSumberDanaTransaksi: ISelectJenisSumberDanaTransaksi[] =
   [
     {
-      value: EnumSumberDanaTransaksi.DANA_PEMERINTAH,
+      value: 'dana_pemerintah',
       item: EnumSumberDanaTransaksi.DANA_PEMERINTAH,
     },
     {
-      value: EnumSumberDanaTransaksi.GAJI_PENGHASILAN,
+      value: 'gaji_penghasilan',
       item: EnumSumberDanaTransaksi.GAJI_PENGHASILAN,
     },
     {
-      value: EnumSumberDanaTransaksi.HASIL_USAHA,
+      value: 'hasil_usaha',
       item: EnumSumberDanaTransaksi.HASIL_USAHA,
     },
     {
-      value: EnumSumberDanaTransaksi.HIBAH_HADIAH,
+      value: 'hibah_hadiah',
       item: EnumSumberDanaTransaksi.HIBAH_HADIAH,
     },
     {
-      value: EnumSumberDanaTransaksi.PENJUALAN_ASSET,
+      value: 'penjualan_asset',
       item: EnumSumberDanaTransaksi.PENJUALAN_ASSET,
     },
     {
-      value: EnumSumberDanaTransaksi.SUMBANGAN,
+      value: 'sumbangan',
       item: EnumSumberDanaTransaksi.SUMBANGAN,
     },
     {
-      value: EnumSumberDanaTransaksi.TABUNGAN_HASIL_INVESTASI,
+      value: 'tabungan_hasil_investasi',
       item: EnumSumberDanaTransaksi.TABUNGAN_HASIL_INVESTASI,
     },
     {
-      value: EnumSumberDanaTransaksi.WARISAN,
+      value: 'warisan',
       item: EnumSumberDanaTransaksi.WARISAN,
     },
   ];
+
+export const INITIAL_STATE_SUMBER_DANA_TRANKSASI = {
+  value: 'dana_pemerintah',
+  position: {
+    dana_pemerintah: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    gaji_penghasilan: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    hasil_usaha: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    hibah_hadiah: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    penjualan_asset: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    sumbangan: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    tabungan_hasil_investasi: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    warisan: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+  },
+};
 
 export const optionsSelectTransaksi: ISelectTransaksi[] = [
   {
@@ -193,8 +256,8 @@ export const optionsSelectTransaksi: ISelectTransaksi[] = [
     item: EnumTransaksi.SKNBI,
   },
   {
-    value: EnumTransaksi.TTT,
-    item: EnumTransaksi.TTT,
+    value: EnumTransaksi.TT,
+    item: EnumTransaksi.TT,
   },
 ];
 
@@ -208,6 +271,218 @@ export const INITIAL_STATE = {
   },
 };
 
+export const INTIAL_JENIS_TRANSAKSI_METODE_TRANSAKSI = {
+  value: 'tunai',
+  position: {
+    tunai: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    debit_rekening: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+  },
+};
+
+export const INITIAL_BIAYA_BANK_KORESPONDEN = {
+  value: 'pengirim',
+  position: {
+    pengirim: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    penerima: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    lainnya: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+  },
+};
+
+export const INITIAL_STATE_JENIS_TRANSAKSI = {
+  value: '',
+  position: {
+    bank_draf: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    kliring_inkaso: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    rtgs: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    setoran: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    sknbi: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    tt: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+  },
+};
+
+export const INITIAL_STATE_JENIS_PENERIMA = {
+  value: '',
+  position: {
+    perorangan: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    perusahaan: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    pemerintah: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+  },
+};
+
+export const INITIAL_STATE_STATUS_KEPENDUDUKAN = {
+  value: '',
+  position: {
+    penduduk: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    bukan_penduduk: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+  },
+};
+
+export const INITIAL_STATE_TUJUAN_TRANSAKSI = {
+  value: '',
+  postion: {
+    biaya_hidup: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    bisnis: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    donasi_atau_amal: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    pembayaran: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    pembelian_barang_atau_jasa: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    tabungan_atau_investasi: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+  },
+};
+
+export const INITIAL_STATE_TIPE_PENGIRIM = {
+  value: 'nasabah',
+  position: {
+    nasabah: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+    non_nasabah: {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    },
+  },
+};
+
+export const INITIAL_STATE_JENIS_PENGIRIM = {
+  jenisPengirim: {
+    value: 'perorangan',
+    position: {
+      perorangan: {
+        top: 122,
+        right: 0,
+        bottom: 0,
+        left: 599,
+      },
+      perusahaan: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+      },
+      pemerintah: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+      },
+    },
+  },
+};
+
 export const DEFAULT_DATA_AND_POSITION = {
   informasiUmum: {
     tanggal: {
@@ -215,8 +490,15 @@ export const DEFAULT_DATA_AND_POSITION = {
       position: { top: 60, right: 0, bottom: 0, left: 372 },
     },
     jenisTransaksi: {
-      value: 'rtgs',
-      position: { top: 94, right: 0, bottom: 0, left: 193 },
+      value: 'tt',
+      position: {
+        bank_draf: { top: 93, right: 0, bottom: 0, left: 397 },
+        kliring_inkaso: { top: 93, right: 0, bottom: 0, left: 301 },
+        rtgs: { top: 94, right: 0, bottom: 0, left: 192 },
+        setoran: { top: 94, right: 0, bottom: 0, left: 88 },
+        sknbi: { top: 94, right: 0, bottom: 0, left: 246 },
+        tt: { top: 94, right: 0, bottom: 0, left: 151 },
+      },
     },
   },
   informasiPenerimaDanValidasi: {
@@ -237,7 +519,7 @@ export const DEFAULT_DATA_AND_POSITION = {
       position: { top: 367, right: 0, bottom: 0, left: 162 },
     },
     alamatDanTelepon: {
-      value: 'Jalan perdamainya',
+      value: 'Jalan perdamainya wangga',
       position: { top: 384, right: 0, bottom: 0, left: 162 },
     },
     jenisDanNomorIdentitas: {
@@ -246,17 +528,36 @@ export const DEFAULT_DATA_AND_POSITION = {
     },
     jenisPenerima: {
       value: 'perorangan',
-      position: { top: 278, right: 0, bottom: 0, left: 158 },
+      position: {
+        perorangan: { top: 278, right: 0, bottom: 0, left: 158 },
+        perusahaan: { top: 278, right: 0, bottom: 0, left: 253 },
+        pemerintah: { top: 278, right: 0, bottom: 0, left: 362 },
+      },
     },
     statusKependudukan: {
-      value: 'bukan penduduk',
-      position: { top: 300, right: 0, bottom: 0, left: 158 },
+      value: 'bukan_penduduk',
+      position: {
+        penduduk: { top: 302, right: 0, bottom: 0, left: 158 },
+        bukan_penduduk: { top: 302, right: 0, bottom: 0, left: 253 },
+      },
     },
   },
   informasiTransaksi: {
     tujuanTransaksi: {
-      value: 'bisnis',
-      position: { top: 459, right: 0, bottom: 0, left: 126 },
+      value: 'biaya_hidup',
+      position: {
+        bisnis: { top: 461, right: 0, bottom: 0, left: 126 },
+        biaya_hidup: { top: 438, right: 0, bottom: 0, left: 366 },
+        donasi_atau_amal: { top: 461, right: 0, bottom: 0, left: 366 },
+        pembayaran: { top: 438, right: 0, bottom: 0, left: 238 },
+        pembelian_barang_atau_jasa: {
+          top: 461,
+          right: 0,
+          bottom: 0,
+          left: 238,
+        },
+        tabungan_atau_investasi: { top: 437, right: 0, bottom: 0, left: 126 },
+      },
     },
     beritaTransaksi: {
       value: 'Berita transaksi',
@@ -266,19 +567,29 @@ export const DEFAULT_DATA_AND_POSITION = {
   informasiPengirim: {
     tipePengirim: {
       value: 'nasabah',
-      position: { top: 72, right: 0, bottom: 0, left: 599 },
+      position: {
+        nasabah: { top: 72, right: 0, bottom: 0, left: 599 },
+        non_nasabah: { top: 73, right: 0, bottom: 0, left: 695 },
+      },
     },
     nikOrPassporOrNpwpPerusahaan: {
       value: '756432343656323',
       position: { top: 96, right: 0, bottom: 0, left: 628 },
     },
     jenisPengirim: {
-      value: 'perorangan',
-      position: { top: 122, right: 0, bottom: 0, left: 599 },
+      value: 'pemerintah',
+      position: {
+        perorangan: { top: 122, right: 0, bottom: 0, left: 599 },
+        perusahaan: { top: 122, right: 0, bottom: 0, left: 694 },
+        pemerintah: { top: 122, right: 0, bottom: 0, left: 786 },
+      },
     },
     statusKependudukan: {
-      value: 'penduduk',
-      position: { top: 144, right: 0, bottom: 0, left: 599 },
+      value: 'bukan_penduduk',
+      position: {
+        penduduk: { top: 144, right: 0, bottom: 0, left: 599 },
+        bukan_penduduk: { top: 144, right: 0, bottom: 0, left: 695 },
+      },
     },
     namaPengirim: {
       value: 'John doe',
@@ -291,8 +602,11 @@ export const DEFAULT_DATA_AND_POSITION = {
   },
   informasiMetodeTransaksi: {
     jenisTransaksi: {
-      value: 'tunai',
-      position: { top: 253, right: 0, bottom: 0, left: 473 },
+      value: 'debit_rekening',
+      position: {
+        tunai: { top: 253, right: 0, bottom: 0, left: 473 },
+        debit_rekening: { top: 254, right: 0, bottom: 0, left: 518 },
+      },
     },
     cekGiro: {
       value: '12345678912345',
@@ -347,14 +661,26 @@ export const DEFAULT_DATA_AND_POSITION = {
   },
   informasiSumberDanaTransaksi: {
     sumberDanaTransaksi: {
-      value: 'gaji / penghasilan',
-      position: { top: 449, right: 0, bottom: 0, left: 472 },
+      value: 'gaji_penghasilan',
+      position: {
+        dana_pemerintah: { top: 0, right: 0, bottom: 0, left: 0 },
+        gaji_penghasilan: { top: 449, right: 0, bottom: 0, left: 472 },
+        hasil_usaha: { top: 0, right: 0, bottom: 0, left: 0 },
+        hibah_hadiah: { top: 0, right: 0, bottom: 0, left: 0 },
+        penjualan_asset: { top: 0, right: 0, bottom: 0, left: 0 },
+        sumbangan: { top: 0, right: 0, bottom: 0, left: 0 },
+        tabungan_hasil_investasi: { top: 0, right: 0, bottom: 0, left: 0 },
+        warisan: { top: 0, right: 0, bottom: 0, left: 0 },
+      },
     },
   },
   informasiBiayaTransaksi: {
     jenisTransaksi: {
       value: 'tunai',
-      position: { top: 539, right: 0, bottom: 0, left: 473 },
+      position: {
+        tunai: { top: 540, right: 0, bottom: 0, left: 472 },
+        debit_rekening: { top: 540, right: 0, bottom: 0, left: 556 },
+      },
     },
     totalBiayaTransaksi: {
       value: '12345678912345',
@@ -362,8 +688,17 @@ export const DEFAULT_DATA_AND_POSITION = {
     },
     biayaBankKoresponden: {
       value: 'pengirim',
-      position: { top: 585, right: 0, bottom: 0, left: 474 },
+      position: {
+        pengirim: { top: 583, right: 0, bottom: 0, left: 474 },
+        penerima: { top: 583, right: 0, bottom: 0, left: 558 },
+        lainnya: { top: 4, right: 0, bottom: 0, left: 0 },
+      },
     },
-    lainnya: { value: '', position: { top: 0, right: 0, bottom: 0, left: 0 } },
+    lainnya: {
+      value: 'lainnya',
+      position: { top: 582, right: 0, bottom: 0, left: 714 },
+    },
   },
 };
+
+export const VERSION_LOCAL_STORAGE_FORM_MANDIRI = 'form_mandiri_v.1.0';
