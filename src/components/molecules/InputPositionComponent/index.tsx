@@ -36,54 +36,63 @@ const InputPositionComponent: React.FC<IProps> = (props) => {
     <div className={classNames(props.classNameRoot)}>
       <Typography className={classes.label}>Position (px)</Typography>
       <div className={classes.containerContent}>
-        <TextField
-          type='number'
-          value={
-            props.keyActive
-              ? props.dataPosition[props.keyActive].top
-              : props.dataPosition.top
-          }
-          label='top'
-          name='top'
-          onChange={handleChange}
-          classNameLabel={classes.labelText}
-        />
-        <TextField
-          type='number'
-          value={
-            props.keyActive
-              ? props.dataPosition[props.keyActive].right
-              : props.dataPosition.right
-          }
-          name='right'
-          label='right'
-          classNameLabel={classes.labelText}
-          onChange={handleChange}
-        />
-        <TextField
-          type='number'
-          value={
-            props.keyActive
-              ? props.dataPosition[props.keyActive].bottom
-              : props.dataPosition.bottom
-          }
-          name='bottom'
-          label='bottom'
-          onChange={handleChange}
-          classNameLabel={classes.labelText}
-        />
-        <TextField
-          type='number'
-          value={
-            props.keyActive
-              ? props.dataPosition[props.keyActive].left
-              : props.dataPosition.left
-          }
-          name='left'
-          label='left'
-          onChange={handleChange}
-          classNameLabel={classes.labelText}
-        />
+        <div>
+          <TextField
+            type='number'
+            value={
+              props.keyActive
+                ? props.dataPosition[props.keyActive].top
+                : props.dataPosition.top
+            }
+            label='top'
+            name='top'
+            onChange={handleChange}
+            classNameLabel={classes.labelText}
+            className={classes.with}
+          />
+
+          <TextField
+            type='number'
+            value={
+              props.keyActive
+                ? props.dataPosition[props.keyActive].right
+                : props.dataPosition.right
+            }
+            name='right'
+            label='right'
+            classNameLabel={classes.labelText}
+            className={classes.with}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <TextField
+            type='number'
+            value={
+              props.keyActive
+                ? props.dataPosition[props.keyActive].bottom
+                : props.dataPosition.bottom
+            }
+            name='bottom'
+            label='bottom'
+            onChange={handleChange}
+            classNameLabel={classes.labelText}
+            className={classes.with}
+          />
+          <TextField
+            type='number'
+            value={
+              props.keyActive
+                ? props.dataPosition[props.keyActive].left
+                : props.dataPosition.left
+            }
+            name='left'
+            label='left'
+            onChange={handleChange}
+            classNameLabel={classes.labelText}
+            className={classes.with}
+          />
+        </div>
       </div>
     </div>
   );

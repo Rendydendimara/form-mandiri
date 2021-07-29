@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 12,
     color: 'var(--color-black)',
   },
+  with: {
+    width: 50,
+  },
 }));
 
 export default useStyles;

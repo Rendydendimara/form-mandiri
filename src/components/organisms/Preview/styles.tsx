@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    position: 'relative',
+    // position: 'relative',
     overflow: 'hidden',
     padding: '0 20px',
     alignItems: 'center',

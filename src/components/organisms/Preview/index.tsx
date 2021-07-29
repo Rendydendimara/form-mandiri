@@ -18,29 +18,31 @@ const Preview: React.FC<IProps> = (props): ReactElement => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <div id='previewForm'>
-        <MemoizePreviewInformasiUmumComponent
-          data={props.dataGlobal?.informasiUmum}
-        />
-        <MemoizePreviewInformasiPenerimaDanValidasiComponent
-          data={props.dataGlobal?.informasiPenerimaDanValidasi}
-        />
-        <MemoizePreviewPreviewInformasiTransaksiComponent
-          data={props.dataGlobal?.informasiTransaksi}
-        />
-        <MemoizePreviewInformasiPengirimComponent
-          data={props.dataGlobal?.informasiPengirim}
-        />
-        <MemoizePreviewInformasiMetodeTransaksiComponent
-          data={props.dataGlobal?.informasiMetodeTransaksi}
-        />
-        <MemoizePreviewInformasiSumberDanaTransaksiComponent
-          data={props.dataGlobal?.informasiSumberDanaTransaksi}
-        />
-        <MemoizePreviewInformasBiayaTransaksiComponent
-          data={props.dataGlobal?.informasiBiayaTransaksi}
-        />
-      </div>
+      {props.dataGlobal && (
+        <div id='previewForm'>
+          <MemoizePreviewInformasiUmumComponent
+            data={props.dataGlobal?.informasiUmum}
+          />
+          <MemoizePreviewInformasiPenerimaDanValidasiComponent
+            data={props.dataGlobal?.informasiPenerimaDanValidasi}
+          />
+          <MemoizePreviewPreviewInformasiTransaksiComponent
+            data={props.dataGlobal?.informasiTransaksi}
+          />
+          <MemoizePreviewInformasiPengirimComponent
+            data={props.dataGlobal?.informasiPengirim}
+          />
+          <MemoizePreviewInformasiMetodeTransaksiComponent
+            data={props.dataGlobal?.informasiMetodeTransaksi}
+          />
+          <MemoizePreviewInformasiSumberDanaTransaksiComponent
+            data={props.dataGlobal?.informasiSumberDanaTransaksi}
+          />
+          <MemoizePreviewInformasBiayaTransaksiComponent
+            data={props.dataGlobal?.informasiBiayaTransaksi}
+          />
+        </div>
+      )}
     </div>
   );
 };

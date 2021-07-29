@@ -168,6 +168,29 @@ button:focus {
   position: relative;
 }
 
+#previewFormPrint {
+  background: url('/assets/images/form-paper-blueprint.jpg');
+  background-size: 100% 100%;
+  height: 750px;
+  width: 950px;
+  position: relative;
+}
+
 .textPreviewForm {
   font-size: 13px !important;
 }
+
+/* .bgImage {
+  background: url('/assets/images/form-paper-blueprint.jpg');
+  background-size: 100% 100%;
+  height: 750px;
+  width: 950px;
+  position: relative;
+} */
+
+/* #imgBGPrint {
+  width: 721.5px;
+  height: 647.5px;
+  width: 19.5cm;
+  height: 17.5cm;
+} */

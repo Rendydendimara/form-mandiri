@@ -702,3 +702,8 @@ export const DEFAULT_DATA_AND_POSITION = {
 };
 
 export const VERSION_LOCAL_STORAGE_FORM_MANDIRI = 'form_mandiri_v.1.0';
+
+export const MINLEFT = -60;
+export const MINTOP = -30;
+export const MINRIGTH = -60;
+export const MINBOTTOM = -40;
