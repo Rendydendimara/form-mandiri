@@ -10,8 +10,7 @@ export interface IStateFormInformasiSumberDanaTransaksi {
       | 'penjualan_asset'
       | 'sumbangan'
       | 'tabungan_hasil_investasi'
-      | 'warisan'
-      | '';
+      | 'warisan';
     position: {
       dana_pemerintah: IPositionCompoent;
       gaji_penghasilan: IPositionCompoent;

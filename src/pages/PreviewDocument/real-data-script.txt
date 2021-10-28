@@ -1,0 +1,572 @@
+import React from 'react';
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  Image,
+} from '@react-pdf/renderer';
+import { PDFViewer } from '@react-pdf/renderer';
+// import { ReactComponent as CheckIcon } from 'assets/icons/check.svg';
+import ImageBG from 'assets/images/form-paper-blueprint.jpg';
+import CheckImg from 'assets/icons/check.png';
+import { IDataGlobal } from 'interfaces/IDataGlobal';
+import { getLocal } from 'local/localStorage';
+import { VERSION_LOCAL_STORAGE_FORM_MANDIRI } from 'constant';
+import { IDataTabelInformasiMetodeTransaksi } from 'interfaces/IStateInformasiMetodeTransaksi';
+
+// Create styles
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: 'row',
+  },
+  section: {
+    flexGrow: 1,
+    width: 'auto',
+  },
+  image: {
+    position: 'absolute',
+  },
+  text: {
+    fontSize: 12,
+  },
+});
+
+// Create Document Component
+const PreviewDocument = () => {
+  const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal(
+    VERSION_LOCAL_STORAGE_FORM_MANDIRI
+  );
+
+  return (
+    <PDFViewer>
+      <Document>
+        <Page
+          debug={false}
+          size={{ width: 793, height: 605 }}
+          style={styles.page}
+        >
+          <View style={styles.section}>
+            <Image
+              src={ImageBG}
+              style={{
+                width: '793px',
+                position: 'absolute',
+                height: '605px',
+                zIndex: -1,
+              }}
+            />
+          </View>
+          {/* Section Informasi Umum */}
+          <View style={styles.section}>
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                top: DATA_COOKIE_FORM_MANDIRI.informasiUmum.tanggal.position
+                  .top,
+                left: DATA_COOKIE_FORM_MANDIRI.informasiUmum.tanggal.position
+                  .right,
+              }}
+            >
+              {DATA_COOKIE_FORM_MANDIRI.informasiUmum.tanggal.value}
+            </Text>
+            <Image
+              src={CheckImg}
+              style={{
+                width: '14px',
+                position: 'absolute',
+                left: DATA_COOKIE_FORM_MANDIRI.informasiUmum.jenisTransaksi
+                  .position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiUmum.jenisTransaksi.value
+                ].left,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiUmum.jenisTransaksi
+                  .position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiUmum.jenisTransaksi.value
+                ].top,
+              }}
+            />
+          </View>
+
+          {/* Section Informasi Penerima Dan Validasi */}
+          <View style={styles.section}>
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .validasi.position.top,
+                left: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .validasi.position.left,
+              }}
+            >
+              {
+                DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.validasi
+                  .value
+              }
+            </Text>
+            <Image
+              src={CheckImg}
+              style={{
+                width: '14px',
+                position: 'absolute',
+                left: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .jenisPenerima.position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                    .jenisPenerima.value
+                ].left,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .jenisPenerima.position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                    .jenisPenerima.value
+                ].top,
+              }}
+            />
+            <Image
+              src={CheckImg}
+              style={{
+                width: '14px',
+                position: 'absolute',
+                left: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .statusKependudukan.position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                    .statusKependudukan.value
+                ].left,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .statusKependudukan.position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                    .statusKependudukan.value
+                ].top,
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .namaPenerima.position.top,
+                left: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .namaPenerima.position.left,
+              }}
+            >
+              {
+                DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .namaPenerima.value
+              }
+            </Text>
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .noRekening.position.top,
+                left: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .noRekening.position.left,
+              }}
+            >
+              {
+                DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.noRekening
+                  .value
+              }
+            </Text>
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.bank
+                  .position.top,
+                left: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.bank
+                  .position.left,
+              }}
+            >
+              {DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi.bank.value}
+            </Text>
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .alamatDanTelepon.position.top,
+                left: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .alamatDanTelepon.position.left,
+              }}
+            >
+              {
+                DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .alamatDanTelepon.value
+              }
+            </Text>
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                left: DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .jenisDanNomorIdentitas.position.left,
+                top:
+                  DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                    .jenisDanNomorIdentitas.position.top + 10,
+              }}
+            >
+              {
+                DATA_COOKIE_FORM_MANDIRI.informasiPenerimaDanValidasi
+                  .jenisDanNomorIdentitas.value
+              }
+            </Text>
+          </View>
+
+          {/* Section Informasi Transaksi */}
+          <View style={styles.section}>
+            <Image
+              src={CheckImg}
+              style={{
+                width: '14px',
+                position: 'absolute',
+                left: DATA_COOKIE_FORM_MANDIRI.informasiTransaksi
+                  .tujuanTransaksi.position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiTransaksi.tujuanTransaksi
+                    .value
+                ].left,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiTransaksi.tujuanTransaksi
+                  .position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiTransaksi.tujuanTransaksi
+                    .value
+                ].top,
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                left: DATA_COOKIE_FORM_MANDIRI.informasiTransaksi
+                  .beritaTransaksi.position.left,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiTransaksi.beritaTransaksi
+                  .position.top,
+              }}
+            >
+              {
+                DATA_COOKIE_FORM_MANDIRI.informasiTransaksi.beritaTransaksi
+                  .value
+              }
+            </Text>
+          </View>
+
+          {/* Section Informasi Pengirim */}
+          <View style={styles.section}>
+            <Image
+              src={CheckImg}
+              style={{
+                width: '14px',
+                position: 'absolute',
+                left: DATA_COOKIE_FORM_MANDIRI.informasiPengirim.tipePengirim
+                  .position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiPengirim.tipePengirim.value
+                ].left,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPengirim.tipePengirim
+                  .position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiPengirim.tipePengirim.value
+                ].top,
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiPengirim
+                    .nikOrPassporOrNpwpPerusahaan.position.left - 400,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPengirim
+                  .nikOrPassporOrNpwpPerusahaan.position.top,
+              }}
+            >
+              {
+                DATA_COOKIE_FORM_MANDIRI.informasiPengirim
+                  .nikOrPassporOrNpwpPerusahaan.value
+              }
+            </Text>
+            <Image
+              src={CheckImg}
+              style={{
+                width: '14px',
+                position: 'absolute',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiPengirim.jenisPengirim
+                    .position[
+                    DATA_COOKIE_FORM_MANDIRI.informasiPengirim.jenisPengirim
+                      .value
+                  ].left - 400,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPengirim.jenisPengirim
+                  .position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiPengirim.jenisPengirim.value
+                ].top,
+              }}
+            />
+            <Image
+              src={CheckImg}
+              style={{
+                width: '14px',
+                position: 'absolute',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiPengirim.statusKependudukan
+                    .position[
+                    DATA_COOKIE_FORM_MANDIRI.informasiPengirim
+                      .statusKependudukan.value
+                  ].left - 400,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPengirim
+                  .statusKependudukan.position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiPengirim.statusKependudukan
+                    .value
+                ].top,
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiPengirim.namaPengirim
+                    .position.left - 400,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPengirim.namaPengirim
+                  .position.top,
+              }}
+            >
+              {DATA_COOKIE_FORM_MANDIRI.informasiPengirim.namaPengirim.value}
+            </Text>
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                width: '1000px',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiPengirim
+                    .alamatDanNomorTelepon.position.left - 400,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiPengirim
+                  .alamatDanNomorTelepon.position.top,
+              }}
+            >
+              {
+                DATA_COOKIE_FORM_MANDIRI.informasiPengirim.alamatDanNomorTelepon
+                  .value
+              }
+            </Text>
+          </View>
+
+          {/* Section Informasi Metode Transaksi */}
+          <View style={styles.section}>
+            <Image
+              src={CheckImg}
+              style={{
+                width: '14px',
+                position: 'absolute',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi
+                    .jenisTransaksi.position[
+                    DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi
+                      .jenisTransaksi.value
+                  ].left - 400,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi
+                  .jenisTransaksi.position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi
+                    .jenisTransaksi.value
+                ].top,
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                width: '1000px',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.cekGiro
+                    .position.left - 400,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.cekGiro
+                  .position.top,
+              }}
+            >
+              {DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.cekGiro.value}
+            </Text>
+            {DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.dataTabel.map(
+              (tabel: IDataTabelInformasiMetodeTransaksi, index) => (
+                <View key={index}>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      position: 'absolute',
+                      width: '1000px',
+                      left: tabel.bankTarik.position.left - 500,
+                      top: tabel.bankTarik.position.top,
+                    }}
+                  >
+                    {tabel.bankTarik.value}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      position: 'absolute',
+                      width: '1000px',
+                      left: tabel.noCekAtauBg.position.left - 520,
+                      top: tabel.noCekAtauBg.position.top,
+                    }}
+                  >
+                    {tabel.noCekAtauBg.value}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      position: 'absolute',
+                      width: '1000px',
+                      left: tabel.valuta.position.left - 540,
+                      top: tabel.valuta.position.top,
+                    }}
+                  >
+                    {tabel.valuta.value}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      position: 'absolute',
+                      width: '1000px',
+                      left: tabel.nominal.position.left - 560,
+                      top: tabel.nominal.position.top,
+                    }}
+                  >
+                    {tabel.nominal.value}
+                  </Text>
+                </View>
+              )
+            )}
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                width: '1000px',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi
+                    .jumlahSetoran.position.left - 400,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi
+                  .jumlahSetoran.position.top,
+              }}
+            >
+              {
+                DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.jumlahSetoran
+                  .value
+              }
+            </Text>
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                width: '1000px',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.terbilang
+                    .position.left - 400,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.terbilang
+                  .position.top,
+              }}
+            >
+              {
+                DATA_COOKIE_FORM_MANDIRI.informasiMetodeTransaksi.terbilang
+                  .value
+              }
+            </Text>
+          </View>
+
+          {/* Section Informasi Sumber Dana Transaksi */}
+          <View style={styles.section}>
+            <Image
+              src={CheckImg}
+              style={{
+                width: '14px',
+                position: 'absolute',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiSumberDanaTransaksi
+                    .sumberDanaTransaksi.position[
+                    DATA_COOKIE_FORM_MANDIRI.informasiSumberDanaTransaksi
+                      .sumberDanaTransaksi.value
+                  ].left - 400,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiSumberDanaTransaksi
+                  .sumberDanaTransaksi.position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiSumberDanaTransaksi
+                    .sumberDanaTransaksi.value
+                ].top,
+              }}
+            />
+          </View>
+
+          {/* Section Informas Biaya Transaksi */}
+          <View style={styles.section}>
+            <Image
+              src={CheckImg}
+              style={{
+                width: '14px',
+                position: 'absolute',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi
+                    .jenisTransaksi.position[
+                    DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi
+                      .jenisTransaksi.value
+                  ].left - 530,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi
+                  .jenisTransaksi.position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi
+                    .jenisTransaksi.value
+                ].top,
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                width: '1000px',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi
+                    .totalBiayaTransaksi.position.left - 800,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi
+                  .totalBiayaTransaksi.position.top,
+              }}
+            >
+              {
+                DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi
+                  .totalBiayaTransaksi.value
+              }
+            </Text>
+            <Image
+              src={CheckImg}
+              style={{
+                width: '14px',
+                position: 'absolute',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi
+                    .biayaBankKoresponden.position[
+                    DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi
+                      .biayaBankKoresponden.value
+                  ].left - 530,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi
+                  .biayaBankKoresponden.position[
+                  DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi
+                    .biayaBankKoresponden.value
+                ].top,
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 12,
+                position: 'absolute',
+                width: '1000px',
+                left:
+                  DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.lainnya
+                    .position.left - 800,
+                top: DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.lainnya
+                  .position.top,
+              }}
+            >
+              {DATA_COOKIE_FORM_MANDIRI.informasiBiayaTransaksi.lainnya.value}
+            </Text>
+          </View>
+        </Page>
+      </Document>
+    </PDFViewer>
+  );
+};
+
+export default PreviewDocument;

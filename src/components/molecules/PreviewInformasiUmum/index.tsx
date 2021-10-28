@@ -1,6 +1,3 @@
-import { Typography } from '@material-ui/core';
-import IconCheck from 'components/atoms/IconCheck';
-import { MINLEFT, MINRIGTH, MINTOP } from 'constant';
 import { IStateFormInformasiUmum } from 'interfaces/IStateFormInformasiUmum';
 import React, { Fragment, ReactElement } from 'react';
 import { ReactComponent as CheckIcon } from 'assets/icons/check.svg';

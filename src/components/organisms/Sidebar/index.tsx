@@ -16,7 +16,6 @@ import { IStateInformasiBiayaTransaksi } from 'interfaces/IStateInformasiBiayaTr
 import { IStateInformasiMetodeTransaksi } from 'interfaces/IStateInformasiMetodeTransaksi';
 import { IStateInformasiPengirim } from 'interfaces/IStateInformasiPengirim';
 import React, { ReactElement } from 'react';
-import { useHistory } from 'react-router';
 import useStyles from './styles';
 
 interface IProps {
@@ -35,7 +34,6 @@ interface IProps {
 }
 
 const Sidebar: React.FC<IProps> = (props): ReactElement => {
-  const history = useHistory();
   const classes = useStyles();
 
   const handleChangeInformasiUmum = (data: IStateFormInformasiUmum): void => {
@@ -72,7 +70,8 @@ const Sidebar: React.FC<IProps> = (props): ReactElement => {
     props.changeDataGlobal('informasiBiayaTransaksi', data);
   };
   const handleButonPrintClicked = (): void => {
-    history.push('/print');
+    const win = window.open('/print', '_blank');
+    win?.focus();
   };
 
   const handleResetData = (): void => {

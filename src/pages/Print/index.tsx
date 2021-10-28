@@ -13,7 +13,6 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { classNames } from 'utils/classnames';
 import useStyles from './styles';
-import ImageBG from 'assets/images/form-paper-blueprint.jpg';
 
 interface IProps {}
 export interface IPosition {
@@ -60,69 +59,69 @@ const Print: React.FC<IProps> = (): ReactElement => {
   return (
     <div className={classes.root}>
       {DATA_COOKIE_FORM_MANDIRI && (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <img
-            src={ImageBG}
-            id='imgBGPrint'
+        // <div
+        //   style={{
+        //     display: 'flex',
+        //     justifyContent: 'center',
+        //     alignItems: 'center',
+        //   }}
+        // >
+        //   <img
+        //     src={ImageBG}
+        //     id='imgBGPrint'
+        //     style={{
+        //       width: `${widhtPaper}cm`,
+        //       height: `${heigthPaper}cm`,
+        //     }}
+        //   />
+        // </div>
+        // )}
+        <div id='previewFormPrint'>
+          <div
+            // className={classes.containerPrintPage}
             style={{
-              width: `${widhtPaper}cm`,
-              height: `${heigthPaper}cm`,
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gridTemplateRows: 'repeat(2, 100px)',
             }}
-          />
-        </div>
-      )}
-      {/* <div id='previewFormPrint'>
-            <div
-              // className={classes.containerPrintPage}
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gridTemplateRows: 'repeat(2, 100px)',
-              }}
-            >
-              <div>
-                 <PreviewInformasiUmum
-              data={DATA_COOKIE_FORM_MANDIRI?.informasiUmum}
-              isPrint={true}
-              valueMin={valueMin}
-            /> 
-                 <PreviewInformasiPenerimaDanValidasi
-              data={DATA_COOKIE_FORM_MANDIRI?.informasiPenerimaDanValidasi}
-              isPrint={true}
-            />
-            <PreviewInformasiTransaksi
-              data={DATA_COOKIE_FORM_MANDIRI?.informasiTransaksi}
-              isPrint={true}
-            /> 
-              </div>
-              <div>
-                 <PreviewInformasiPengirim
-              data={DATA_COOKIE_FORM_MANDIRI?.informasiPengirim}
-              isPrint={true}
-            />
-            <PreviewInformasiMetodeTransaksi
-              data={DATA_COOKIE_FORM_MANDIRI?.informasiMetodeTransaksi}
-              isPrint={true}
-            />
-            <PreviewInformasiSumberDanaTransaksi
-              data={DATA_COOKIE_FORM_MANDIRI?.informasiSumberDanaTransaksi}
-              isPrint={true}
-            />
-            <PreviewInformasBiayaTransaksi
-              data={DATA_COOKIE_FORM_MANDIRI?.informasiBiayaTransaksi}
-              isPrint={true}
-            /> 
-              </div>
+          >
+            <div>
+              <PreviewInformasiUmum
+                data={DATA_COOKIE_FORM_MANDIRI?.informasiUmum}
+                isPrint={true}
+                valueMin={valueMin}
+              />
+              <PreviewInformasiPenerimaDanValidasi
+                data={DATA_COOKIE_FORM_MANDIRI?.informasiPenerimaDanValidasi}
+                isPrint={true}
+              />
+              <PreviewInformasiTransaksi
+                data={DATA_COOKIE_FORM_MANDIRI?.informasiTransaksi}
+                isPrint={true}
+              />
             </div>
-          </div> 
+            <div>
+              <PreviewInformasiPengirim
+                data={DATA_COOKIE_FORM_MANDIRI?.informasiPengirim}
+                isPrint={true}
+              />
+              <PreviewInformasiMetodeTransaksi
+                data={DATA_COOKIE_FORM_MANDIRI?.informasiMetodeTransaksi}
+                isPrint={true}
+              />
+              <PreviewInformasiSumberDanaTransaksi
+                data={DATA_COOKIE_FORM_MANDIRI?.informasiSumberDanaTransaksi}
+                isPrint={true}
+              />
+              <PreviewInformasBiayaTransaksi
+                data={DATA_COOKIE_FORM_MANDIRI?.informasiBiayaTransaksi}
+                isPrint={true}
+              />
+            </div>
+          </div>
         </div>
-      )} */}
+        // </div>
+      )}
       <div className={classes.containerActionButton}>
         <Button
           classsNameLabel={classes.labelBtnPrint}

@@ -1,0 +1,50 @@
+/* https://www.sitepoint.com/css-printer-friendly-pages/ */
+
+@page {
+  size: 21cm 16cm;
+  /* size: portrait; */
+  margin: 0 !important;
+  /* margin-top: -11mm !important;
+  margin-left: 25px !important; */
+  padding: 0 !important;
+}
+
+body {
+  margin: 0;
+  color: #000;
+  padding: 0;
+}
+
+/* header,
+footer,
+aside,
+nav,
+form,
+iframe,
+.menu,
+.hero,
+.adslot {
+  display: none !important;
+} */
+
+a::after {
+  content: ' (' attr(href) ')';
+}
+
+/* visible when printed */
+/* .print {
+  display: block;
+} */
+title,
+.hideOnPrint {
+  display: none !important;
+}
+
+.containerprintpagePage {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.tanggal {
+  left: 60px !important;
+}

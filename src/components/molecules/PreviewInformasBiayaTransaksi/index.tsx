@@ -84,18 +84,20 @@ const PreviewInformasBiayaTransaksi: React.FC<IProps> = (
             <IconCheck />
           </Typography>
         )}
-        <Typography
-          style={{
-            position: 'absolute',
-            top: `${props.data.lainnya.position.top + topMin}px`,
-            left: `${props.data.lainnya.position.left + leftMin}px`,
-            bottom: `${props.data.lainnya.position.bottom}px`,
-            right: `${props.data.lainnya.position.right}px`,
-          }}
-          className='textPreviewForm'
-        >
-          {props.data.lainnya.value}
-        </Typography>
+        {props.data.lainnya.value && (
+          <Typography
+            style={{
+              position: 'absolute',
+              top: `${props.data.lainnya.position.top + topMin}px`,
+              left: `${props.data.lainnya.position.left + leftMin}px`,
+              bottom: `${props.data.lainnya.position.bottom}px`,
+              right: `${props.data.lainnya.position.right}px`,
+            }}
+            className='textPreviewForm'
+          >
+            {props.data.lainnya.value}
+          </Typography>
+        )}
       </div>
     </div>
   );

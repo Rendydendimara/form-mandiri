@@ -9,8 +9,7 @@ export interface IStateFormInformasiTransaksi {
       | 'donasi_atau_amal'
       | 'pembayaran'
       | 'pembelian_barang_atau_jasa'
-      | 'tabungan_atau_investasi'
-      | '';
+      | 'tabungan_atau_investasi';
 
     position: {
       biaya_hidup: IPositionCompoent;

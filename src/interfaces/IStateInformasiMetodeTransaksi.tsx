@@ -22,7 +22,7 @@ export interface IDataTabelInformasiMetodeTransaksi {
 
 export interface IStateInformasiMetodeTransaksi {
   jenisTransaksi: {
-    value: 'tunai' | 'debit_rekening' | '';
+    value: 'tunai' | 'debit_rekening';
     position: {
       tunai: IPositionCompoent;
       debit_rekening: IPositionCompoent;

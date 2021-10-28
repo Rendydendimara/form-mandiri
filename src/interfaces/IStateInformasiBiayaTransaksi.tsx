@@ -2,7 +2,7 @@ import { IPositionCompoent } from './IPositionComponent';
 
 export interface IStateInformasiBiayaTransaksi {
   jenisTransaksi: {
-    value: 'tunai' | 'debit_rekening' | '';
+    value: 'tunai' | 'debit_rekening';
     position: {
       tunai: IPositionCompoent;
       debit_rekening: IPositionCompoent;
@@ -13,7 +13,7 @@ export interface IStateInformasiBiayaTransaksi {
     position: IPositionCompoent;
   };
   biayaBankKoresponden: {
-    value: 'pengirim' | 'penerima' | 'lainnya' | '';
+    value: 'pengirim' | 'penerima' | 'lainnya';
     position: {
       pengirim: IPositionCompoent;
       penerima: IPositionCompoent;

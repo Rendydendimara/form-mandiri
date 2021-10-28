@@ -3,10 +3,10 @@ import {
   VERSION_LOCAL_STORAGE_FORM_MANDIRI,
 } from 'constant';
 import { getLocal, setLocal } from 'local/localStorage';
+import PreviewDocument from 'pages/PreviewDocument';
 import React, { FC, Fragment, ReactElement, useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import Print from './pages/Print';
 
 const App: FC<any> = (): ReactElement => {
   useEffect(() => {
@@ -23,7 +23,7 @@ const App: FC<any> = (): ReactElement => {
     <Fragment>
       <Switch>
         <Route path='/' exact component={HomePage} />
-        <Route path='/print' exact component={Print} />
+        <Route path='/print' exact component={PreviewDocument} />
         <Route path='*' children={<Redirect to='/' />} />
       </Switch>
     </Fragment>

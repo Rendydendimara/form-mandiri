@@ -30,8 +30,7 @@ export interface IInformasiPenerimaDanValidasi {
     value:
       | EnumSelectJenisPenerima.PERORANGAN
       | EnumSelectJenisPenerima.PERUSAHAAN
-      | EnumSelectJenisPenerima.PEMERINTAH
-      | '';
+      | EnumSelectJenisPenerima.PEMERINTAH;
     position: {
       perorangan: IPositionCompoent;
       perusahaan: IPositionCompoent;
@@ -41,8 +40,7 @@ export interface IInformasiPenerimaDanValidasi {
   statusKependudukan: {
     value:
       | EnumStatusKependudukan.PENDUDUK
-      | EnumStatusKependudukan.BUKAN_PENDUDUK
-      | '';
+      | EnumStatusKependudukan.BUKAN_PENDUDUK;
     position: {
       penduduk: IPositionCompoent;
       bukan_penduduk: IPositionCompoent;

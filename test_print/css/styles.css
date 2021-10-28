@@ -163,20 +163,19 @@ button:focus {
 #previewForm {
   background: url('/assets/images/form-paper-blueprint.jpg');
   background-size: 100% 100%;
-  height: 16cm;
-  width: 21cm;
-  /* height: 750px;
-  width: 950px; */
+  height: 750px;
+  width: 950px;
   position: relative;
 }
 
 #previewFormPrint {
   background: url('/assets/images/form-paper-blueprint.jpg');
   background-size: 100% 100%;
-  height: 16cm;
-  width: 21cm;
+  height: 750px;
+  width: 950px;
   position: relative;
 }
+
 .textPreviewForm {
   font-size: 13px !important;
 }

@@ -2,7 +2,7 @@ import { IPositionCompoent } from './IPositionComponent';
 
 export interface IStateInformasiPengirim {
   tipePengirim: {
-    value: 'nasabah' | 'non_nasabah' | '';
+    value: 'nasabah' | 'non_nasabah';
     position: {
       nasabah: IPositionCompoent;
       non_nasabah: IPositionCompoent;
@@ -13,7 +13,7 @@ export interface IStateInformasiPengirim {
     position: IPositionCompoent;
   };
   jenisPengirim: {
-    value: 'pemerintah' | 'perorangan' | 'perusahaan' | '';
+    value: 'pemerintah' | 'perorangan' | 'perusahaan';
     position: {
       pemerintah: IPositionCompoent;
       perorangan: IPositionCompoent;
@@ -21,7 +21,7 @@ export interface IStateInformasiPengirim {
     };
   };
   statusKependudukan: {
-    value: 'penduduk' | 'bukan_penduduk' | '';
+    value: 'penduduk' | 'bukan_penduduk';
     position: {
       penduduk: IPositionCompoent;
       bukan_penduduk: IPositionCompoent;
