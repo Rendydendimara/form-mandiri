@@ -33,8 +33,12 @@ const styles = StyleSheet.create({
   },
 });
 let pivot = 220;
+interface IProps {
+  isShowBGImage: boolean;
+}
+
 // Create Document Component
-const PreviewDocument = () => {
+const PDFViewDocument: React.FC<IProps> = (props) => {
   const DATA_COOKIE_FORM_MANDIRI: IDataGlobal = getLocal(
     VERSION_LOCAL_STORAGE_FORM_MANDIRI
   );
@@ -47,17 +51,19 @@ const PreviewDocument = () => {
           size={{ width: 793, height: 605 }}
           style={styles.page}
         >
-          <View style={styles.section}>
-            <Image
-              src={ImageBG}
-              style={{
-                width: '793px',
-                position: 'absolute',
-                height: '605px',
-                zIndex: -1,
-              }}
-            />
-          </View>
+          {props.isShowBGImage && (
+            <View style={styles.section}>
+              <Image
+                src={ImageBG}
+                style={{
+                  width: '793px',
+                  position: 'absolute',
+                  height: '605px',
+                  zIndex: -1,
+                }}
+              />
+            </View>
+          )}
           {/* Section Informasi Umum */}
           <View style={styles.section}>
             <Text
@@ -286,7 +292,7 @@ const PreviewDocument = () => {
             />
             <View
               style={{
-                marginLeft: '43px',
+                marginLeft: '15px',
                 display: 'flex',
                 alignItems: 'center',
                 position: 'absolute',
@@ -301,7 +307,7 @@ const PreviewDocument = () => {
                       position: 'absolute',
                       width: '1000px',
                       marginRight: '10px',
-                      left: 15 * index,
+                      left: 16 * index,
                       top: 204,
                     }}
                     key={index}
@@ -321,7 +327,7 @@ const PreviewDocument = () => {
                         fontSize: 11,
                         position: 'absolute',
                         width: '1000px',
-                        left: -70,
+                        left: -100,
                         top: pivot,
                       }}
                     >
@@ -332,7 +338,7 @@ const PreviewDocument = () => {
                         fontSize: 11,
                         position: 'absolute',
                         width: '1000px',
-                        left: 50,
+                        left: 20,
                         top: pivot,
                       }}
                     >
@@ -343,7 +349,7 @@ const PreviewDocument = () => {
                         fontSize: 11,
                         position: 'absolute',
                         width: '1000px',
-                        left: 145,
+                        left: 120,
                         top: pivot,
                       }}
                     >
@@ -354,7 +360,7 @@ const PreviewDocument = () => {
                         fontSize: 11,
                         position: 'absolute',
                         width: '1000px',
-                        left: 220,
+                        left: 190,
                         top: pivot,
                       }}
                     >
@@ -369,7 +375,7 @@ const PreviewDocument = () => {
                 fontSize: 11,
                 position: 'absolute',
                 width: '1000px',
-                left: 82,
+                left: 55,
                 top: 274,
               }}
             >
@@ -383,7 +389,7 @@ const PreviewDocument = () => {
                 fontSize: 11,
                 position: 'absolute',
                 width: '1000px',
-                left: -40,
+                left: -65,
                 top: 292,
               }}
             >
@@ -401,7 +407,7 @@ const PreviewDocument = () => {
               style={{
                 width: '14px',
                 position: 'absolute',
-                left: -211,
+                left: -200,
                 top: 360,
               }}
             />
@@ -414,7 +420,7 @@ const PreviewDocument = () => {
               style={{
                 width: '14px',
                 position: 'absolute',
-                left: -305,
+                left: -300,
                 top: 435,
               }}
             />
@@ -471,4 +477,4 @@ const PreviewDocument = () => {
   );
 };
 
-export default PreviewDocument;
+export default PDFViewDocument;

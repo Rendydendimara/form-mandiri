@@ -69,8 +69,10 @@ const Sidebar: React.FC<IProps> = (props): ReactElement => {
   ): void => {
     props.changeDataGlobal('informasiBiayaTransaksi', data);
   };
-  const handleButonPrintClicked = (): void => {
-    const win = window.open('/print', '_blank');
+  const handleButonPrintClicked = (
+    link: '/print-with-bg' | '/print-pure'
+  ): void => {
+    const win = window.open(link, '_blank');
     win?.focus();
   };
 
@@ -110,9 +112,17 @@ const Sidebar: React.FC<IProps> = (props): ReactElement => {
           fullWidth={true}
           classsNameLabel={classes.labelBtnPrint}
           className={classes.btnPrint}
-          onClick={handleButonPrintClicked}
+          onClick={() => handleButonPrintClicked('/print-with-bg')}
         >
-          Print
+          Print With Background
+        </Button>
+        <Button
+          fullWidth={true}
+          classsNameLabel={classes.labelBtnPrint}
+          className={classes.btnPrint}
+          onClick={() => handleButonPrintClicked('/print-pure')}
+        >
+          Print Without Background
         </Button>
         <Button
           fullWidth={true}
